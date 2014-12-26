@@ -1,0 +1,104 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaplerAPI", "MaplerAPI\MaplerAPI.csproj", "{1A5628EE-4B82-4C7F-818C-F4FA700381D8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataPersistence", "DataPersistence", "{E7C23644-31E3-4431-8BFB-1E2B6137CD45}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{6C763792-8EFC-47B0-BBC5-6B9DABF124EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapler.DataPersistence.Models", "Mapler.DataPersistance.Models\Mapler.DataPersistence.Models.csproj", "{CF52216C-AC6C-4EAD-A4DA-044BFFD3CD27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPersistence.Facade", "DataPersistance.Facade\DataPersistence.Facade.csproj", "{62391B5B-3159-4094-AC44-F75B6C5CFC18}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9DAE1C01-64C0-4418-AA2E-A8CC22BA503A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapler.DataPersistence.MockData", "Mapler.DataPersistence.MockData\Mapler.DataPersistence.MockData.csproj", "{0CC5CEB7-1FAD-48CE-BB2E-742452B2166D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataPersistence.Mapler", "DataPersistence.Mapler", "{72647F81-0836-4B0C-B225-AB2B7FF1BBFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPersistence.Facade.Tests", "DataPersistence.Facade.Tests\DataPersistence.Facade.Tests.csproj", "{63B96C3A-82DF-4378-BFB7-04167A46B726}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPersistence.Facade.Data", "DataPersistence.Facade.Data\DataPersistence.Facade.Data.csproj", "{C23E6D21-BA84-4CF7-A0BE-65B780797FF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "REST.Mapler", "REST.Mapler", "{F25F3B28-C48F-44B0-AABC-BE545090759A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapler.Rest.Dto", "Mapler.Rest.Dto\Mapler.Rest.Dto.csproj", "{55668329-1A3E-49E4-9A23-BEED1AE92D71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapler.Rest.Dto.Mapping", "Mapler.Rest.Dto.Mapping\Mapler.Rest.Dto.Mapping.csproj", "{28B2070A-D83A-4FE5-A45A-7D4685A99FCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapler.Rest.DataFiltering", "Mapler.Rest.DataFiltering\Mapler.Rest.DataFiltering.csproj", "{7912C783-FF53-4AE8-9143-8EF6D8ABF6A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapler.Rest.Dto.Tests", "Mapler.Rest.Dto.Tests\Mapler.Rest.Dto.Tests.csproj", "{0349C122-52B8-4E51-8A14-6173A75AC52B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapler.Rest.Services", "Mapler.Rest.Services\Mapler.Rest.Services.csproj", "{8B74CAF2-E996-47E0-B2D1-9B9A49F9B9B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A5628EE-4B82-4C7F-818C-F4FA700381D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A5628EE-4B82-4C7F-818C-F4FA700381D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A5628EE-4B82-4C7F-818C-F4FA700381D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A5628EE-4B82-4C7F-818C-F4FA700381D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF52216C-AC6C-4EAD-A4DA-044BFFD3CD27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF52216C-AC6C-4EAD-A4DA-044BFFD3CD27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF52216C-AC6C-4EAD-A4DA-044BFFD3CD27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF52216C-AC6C-4EAD-A4DA-044BFFD3CD27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62391B5B-3159-4094-AC44-F75B6C5CFC18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62391B5B-3159-4094-AC44-F75B6C5CFC18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62391B5B-3159-4094-AC44-F75B6C5CFC18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62391B5B-3159-4094-AC44-F75B6C5CFC18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CC5CEB7-1FAD-48CE-BB2E-742452B2166D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CC5CEB7-1FAD-48CE-BB2E-742452B2166D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CC5CEB7-1FAD-48CE-BB2E-742452B2166D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CC5CEB7-1FAD-48CE-BB2E-742452B2166D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63B96C3A-82DF-4378-BFB7-04167A46B726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63B96C3A-82DF-4378-BFB7-04167A46B726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63B96C3A-82DF-4378-BFB7-04167A46B726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63B96C3A-82DF-4378-BFB7-04167A46B726}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C23E6D21-BA84-4CF7-A0BE-65B780797FF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C23E6D21-BA84-4CF7-A0BE-65B780797FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C23E6D21-BA84-4CF7-A0BE-65B780797FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C23E6D21-BA84-4CF7-A0BE-65B780797FF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55668329-1A3E-49E4-9A23-BEED1AE92D71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55668329-1A3E-49E4-9A23-BEED1AE92D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55668329-1A3E-49E4-9A23-BEED1AE92D71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55668329-1A3E-49E4-9A23-BEED1AE92D71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28B2070A-D83A-4FE5-A45A-7D4685A99FCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B2070A-D83A-4FE5-A45A-7D4685A99FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28B2070A-D83A-4FE5-A45A-7D4685A99FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28B2070A-D83A-4FE5-A45A-7D4685A99FCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7912C783-FF53-4AE8-9143-8EF6D8ABF6A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7912C783-FF53-4AE8-9143-8EF6D8ABF6A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7912C783-FF53-4AE8-9143-8EF6D8ABF6A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7912C783-FF53-4AE8-9143-8EF6D8ABF6A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0349C122-52B8-4E51-8A14-6173A75AC52B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0349C122-52B8-4E51-8A14-6173A75AC52B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0349C122-52B8-4E51-8A14-6173A75AC52B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0349C122-52B8-4E51-8A14-6173A75AC52B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B74CAF2-E996-47E0-B2D1-9B9A49F9B9B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B74CAF2-E996-47E0-B2D1-9B9A49F9B9B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B74CAF2-E996-47E0-B2D1-9B9A49F9B9B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B74CAF2-E996-47E0-B2D1-9B9A49F9B9B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CF52216C-AC6C-4EAD-A4DA-044BFFD3CD27} = {72647F81-0836-4B0C-B225-AB2B7FF1BBFD}
+		{62391B5B-3159-4094-AC44-F75B6C5CFC18} = {E7C23644-31E3-4431-8BFB-1E2B6137CD45}
+		{0CC5CEB7-1FAD-48CE-BB2E-742452B2166D} = {72647F81-0836-4B0C-B225-AB2B7FF1BBFD}
+		{63B96C3A-82DF-4378-BFB7-04167A46B726} = {9DAE1C01-64C0-4418-AA2E-A8CC22BA503A}
+		{C23E6D21-BA84-4CF7-A0BE-65B780797FF2} = {E7C23644-31E3-4431-8BFB-1E2B6137CD45}
+		{55668329-1A3E-49E4-9A23-BEED1AE92D71} = {F25F3B28-C48F-44B0-AABC-BE545090759A}
+		{28B2070A-D83A-4FE5-A45A-7D4685A99FCB} = {F25F3B28-C48F-44B0-AABC-BE545090759A}
+		{7912C783-FF53-4AE8-9143-8EF6D8ABF6A6} = {F25F3B28-C48F-44B0-AABC-BE545090759A}
+		{0349C122-52B8-4E51-8A14-6173A75AC52B} = {9DAE1C01-64C0-4418-AA2E-A8CC22BA503A}
+		{8B74CAF2-E996-47E0-B2D1-9B9A49F9B9B0} = {F25F3B28-C48F-44B0-AABC-BE545090759A}
+	EndGlobalSection
+EndGlobal

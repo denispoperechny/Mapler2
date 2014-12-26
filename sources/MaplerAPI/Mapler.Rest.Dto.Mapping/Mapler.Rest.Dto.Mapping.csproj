@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{28B2070A-D83A-4FE5-A45A-7D4685A99FCB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mapler.Rest.Dto.Mapping</RootNamespace>
+    <AssemblyName>Mapler.Rest.Dto.Mapping</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Exceptions\InvalidPersistentDataException.cs" />
+    <Compile Include="Exceptions\MappingException.cs" />
+    <Compile Include="Exceptions\NoMapperAvailableException.cs" />
+    <Compile Include="Interfaces\IDtoMapper.cs" />
+    <Compile Include="Interfaces\IDtoMapperFactory.cs" />
+    <Compile Include="MapperFactory.cs" />
+    <Compile Include="Mappers\TagMapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataPersistance.Facade\DataPersistence.Facade.csproj">
+      <Project>{62391b5b-3159-4094-ac44-f75b6c5cfc18}</Project>
+      <Name>DataPersistence.Facade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataPersistence.Facade.Data\DataPersistence.Facade.Data.csproj">
+      <Project>{c23e6d21-ba84-4cf7-a0be-65b780797ff2}</Project>
+      <Name>DataPersistence.Facade.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapler.DataPersistance.Models\Mapler.DataPersistence.Models.csproj">
+      <Project>{cf52216c-ac6c-4ead-a4da-044bffd3cd27}</Project>
+      <Name>Mapler.DataPersistence.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapler.Rest.Dto\Mapler.Rest.Dto.csproj">
+      <Project>{55668329-1a3e-49e4-9a23-beed1ae92d71}</Project>
+      <Name>Mapler.Rest.Dto</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
