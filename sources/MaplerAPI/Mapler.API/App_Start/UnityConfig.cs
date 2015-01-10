@@ -11,6 +11,7 @@ using Mapler.DataPersistence.MockData;
 using Mapler.Rest.Dto;
 using Mapler.Rest.Dto.Mapping;
 using Mapler.Rest.Dto.Mapping.Interfaces;
+using Mapler.Rest.Dto.Mapping.Mappers;
 using Unity.WebApi;
 
 namespace Mapler.API
@@ -45,11 +46,9 @@ namespace Mapler.API
             container.RegisterType<IPersistentRepository<User>, PersistentRepository<User>>();
             container.RegisterType<IPersistentRepository<UserPass>, PersistentRepository<UserPass>>();
 
-            //TEST
-            //container.RegisterType<ValuesController, ValuesController>();
+            container.RegisterType<IDtoMapper<TagDto, Tag>, TagMapper>();
+            container.RegisterType<IDtoMapper<UserDto, User>, UserMapper>();
 
-            container.RegisterType<IDtoMapperFactory, MapperFactory>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IDtoMapper<TagDto, Tag>>(new InjectionFactory(c => container.Resolve<IDtoMapperFactory>().Create<TagDto, Tag>()));
         }
 
     }

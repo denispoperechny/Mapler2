@@ -10,9 +10,9 @@ using Mapler.Rest.Services;
 
 namespace Mapler.API.Controllers
 {
-    public class TagController : RestControllerBase<TagDto, Tag>, ITagService
+    public class UserController : RestControllerBase<UserDto, User>, IUserService
     {
-        public TagController(IDtoMapper<TagDto, Tag> dtoMapper, IPersistentRepository<Tag> repository, IUnitOfWork uof)
+        public UserController(IDtoMapper<UserDto, User> dtoMapper, IPersistentRepository<User> repository, IUnitOfWork uof)
             : base(dtoMapper, repository, uof)
         {
         }

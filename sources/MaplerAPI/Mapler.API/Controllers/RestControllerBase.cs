@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Http;
 using DataPersistance.Facade;
@@ -17,15 +18,18 @@ namespace Mapler.API.Controllers
     {
         private readonly IDtoMapper<T, U> _dtoMapper;
         private readonly IPersistentRepository<U> _repository;
+        private readonly IUnitOfWork _unitOfWork;
 
         // TODO: Add data filtering
-        protected RestControllerBase(IDtoMapper<T, U> dtoMapper, IPersistentRepository<U> repository)
+        protected RestControllerBase(IDtoMapper<T, U> dtoMapper, IPersistentRepository<U> repository, IUnitOfWork unitOfWork)
         {
             if (dtoMapper == null) throw new ArgumentNullException("dtoMapper");
             if (repository == null) throw new ArgumentNullException("repository");
+            if (unitOfWork == null) throw new ArgumentNullException("unitOfWork");
 
             _dtoMapper = dtoMapper;
             _repository = repository;
+            _unitOfWork = unitOfWork;
         }
 
         protected IDtoMapper<T, U> DtoMapper
@@ -36,6 +40,11 @@ namespace Mapler.API.Controllers
         protected IPersistentRepository<U> Repository
         {
             get { return _repository; }
+        }
+
+        protected IUnitOfWork UnitOfWork
+        {
+            get { return _unitOfWork; }
         }
 
         // GET api/values
@@ -54,18 +63,23 @@ namespace Mapler.API.Controllers
         public virtual void Post([FromBody]T value)
         {
             Repository.Add(DtoMapper.MapBack(value));
+            UnitOfWork.Save();
         }
 
         // PUT api/values/5
         public virtual void Put(Guid id, [FromBody]T value)
         {
-            Repository.Update(DtoMapper.MapBack(value));
+            var persistItem = Repository.Get(id);
+            DtoMapper.UpdateBack(value, persistItem);
+            Repository.Update(persistItem);
+            UnitOfWork.Save();
         }
 
         // DELETE api/values/5
         public virtual void Delete(Guid id)
         {
             Repository.Delete(id);
+            UnitOfWork.Save();
         }
     }
 }

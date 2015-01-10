@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Mapler.Rest.Dto.Mapping.Exceptions
 {
-    public abstract class MappingException : InvalidOperationException
+    public class MappingException : InvalidOperationException
     {
-        protected MappingException(string message) 
+        public MappingException(string message) 
             : base(message)
         {
         }
 
-        protected MappingException(string message, Exception inner)
+        public MappingException(string message, Exception inner)
             : base(message, inner)
         {
         }

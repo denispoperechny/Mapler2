@@ -54,11 +54,34 @@ namespace Mapler.Rest.Dto.Mapping.Mappers
 
             return new Tag
             {
-                Id = item.Id,
+                Id = item.Id == Guid.Empty ? Guid.NewGuid() : item.Id,
                 Company = tagCompany,
                 Name = item.Name,
                 Description = item.Description
             };
+        }
+
+
+        public void UpdateBack(TagDto dtoItem, Tag persistItem)
+        {
+            if (dtoItem == null) throw new ArgumentNullException("dtoItem");
+            if (persistItem == null) throw new ArgumentNullException("persistItem");
+
+            //persistItem.Id = dtoItem.Id;
+            persistItem.Name = dtoItem.Name;
+            persistItem.Description = dtoItem.Description;
+
+            if (persistItem.Company == null || persistItem.Company.Id != dtoItem.CompanyId)
+            {
+                try
+                {
+                    persistItem.Company = _companyRepo.Get(dtoItem.CompanyId);
+                }
+                catch (Exception e)
+                {
+                    throw new InvalidPersistentDataException("Could not get Company. Company Id: " + dtoItem.CompanyId, e);
+                }
+            }
         }
     }
 }

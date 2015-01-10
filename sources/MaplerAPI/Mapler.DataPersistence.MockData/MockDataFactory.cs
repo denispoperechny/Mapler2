@@ -185,7 +185,7 @@ namespace Mapler.DataPersistence.MockData
                 FirstName = "John",
                 LastName = "Smith",
                 Created = DateTime.Parse("2008-05-01"),
-                PassHash = "nothing"
+                //PassHash = "nothing"
             };
 
             yield return new User
@@ -195,7 +195,7 @@ namespace Mapler.DataPersistence.MockData
                 FirstName = "John",
                 LastName = "Doe",
                 Created = DateTime.Parse("2008-05-01"),
-                PassHash = "nothingaswell"
+                //PassHash = "nothingaswell"
             };
 
             yield return new User
@@ -205,7 +205,7 @@ namespace Mapler.DataPersistence.MockData
                 FirstName = "Elvis",
                 LastName = "Presley",
                 Created = DateTime.Parse("2008-05-01"),
-                PassHash = "itselvis"
+                //PassHash = "itselvis"
             };
         }
 

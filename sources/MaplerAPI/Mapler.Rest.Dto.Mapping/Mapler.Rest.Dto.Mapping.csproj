@@ -41,11 +41,9 @@
   <ItemGroup>
     <Compile Include="Exceptions\InvalidPersistentDataException.cs" />
     <Compile Include="Exceptions\MappingException.cs" />
-    <Compile Include="Exceptions\NoMapperAvailableException.cs" />
     <Compile Include="Interfaces\IDtoMapper.cs" />
-    <Compile Include="Interfaces\IDtoMapperFactory.cs" />
-    <Compile Include="MapperFactory.cs" />
     <Compile Include="Mappers\TagMapper.cs" />
+    <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

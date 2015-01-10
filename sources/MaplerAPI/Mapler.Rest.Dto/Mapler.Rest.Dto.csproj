@@ -42,6 +42,7 @@
     <Compile Include="Interfaces\IMaplerDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TagDto.cs" />
+    <Compile Include="UserDto.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
