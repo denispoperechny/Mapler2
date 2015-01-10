@@ -20,6 +20,7 @@ namespace Mapler.DataPersistence.MockData
             result.AddDataCollection(Tags);
             result.AddDataCollection(MapItems);
             result.AddDataCollection(Locations);
+            result.AddDataCollection(UserPasswords);
 
             return result;
         }
@@ -52,6 +53,12 @@ namespace Mapler.DataPersistence.MockData
         public static List<Location> Locations
         {
             get { return _locations ?? (_locations = GenerateLocations().ToList()); }
+        }
+
+        private static List<UserPass> _userPasswords;
+        public static List<UserPass> UserPasswords
+        {
+            get { return _userPasswords ?? (_userPasswords = GenerateUserPasswords().ToList()); }
         }
 
         private static IEnumerable<Company> GenerateCompanies()
@@ -200,6 +207,17 @@ namespace Mapler.DataPersistence.MockData
                 Created = DateTime.Parse("2008-05-01"),
                 PassHash = "itselvis"
             };
+        }
+
+        private static IEnumerable<UserPass> GenerateUserPasswords()
+        {
+            return Users.Select(x => new UserPass()
+            {
+                Id = Guid.NewGuid(), 
+                UserId = x.Id, 
+                PassHash = "pass", 
+                IsActive = true
+            });
         }
     }
 }

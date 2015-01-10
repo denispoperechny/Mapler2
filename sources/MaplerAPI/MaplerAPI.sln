@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaplerAPI", "MaplerAPI\MaplerAPI.csproj", "{1A5628EE-4B82-4C7F-818C-F4FA700381D8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataPersistence", "DataPersistence", "{E7C23644-31E3-4431-8BFB-1E2B6137CD45}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{6C763792-8EFC-47B0-BBC5-6B9DABF124EA}"
@@ -35,16 +33,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapler.Rest.Dto.Tests", "Ma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapler.Rest.Services", "Mapler.Rest.Services\Mapler.Rest.Services.csproj", "{8B74CAF2-E996-47E0-B2D1-9B9A49F9B9B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapler.API", "Mapler.API\Mapler.API.csproj", "{98A6C825-1617-4A80-B60F-417F15F3BFC0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5A1B0BE4-023A-42BA-8DA0-82222586E837}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapler.Security", "Mapler.Security\Mapler.Security.csproj", "{E398B252-E39B-4488-BB3B-F9F49BFAD1CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1A5628EE-4B82-4C7F-818C-F4FA700381D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A5628EE-4B82-4C7F-818C-F4FA700381D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A5628EE-4B82-4C7F-818C-F4FA700381D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A5628EE-4B82-4C7F-818C-F4FA700381D8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF52216C-AC6C-4EAD-A4DA-044BFFD3CD27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CF52216C-AC6C-4EAD-A4DA-044BFFD3CD27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF52216C-AC6C-4EAD-A4DA-044BFFD3CD27}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -85,6 +85,14 @@ Global
 		{8B74CAF2-E996-47E0-B2D1-9B9A49F9B9B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B74CAF2-E996-47E0-B2D1-9B9A49F9B9B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B74CAF2-E996-47E0-B2D1-9B9A49F9B9B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98A6C825-1617-4A80-B60F-417F15F3BFC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98A6C825-1617-4A80-B60F-417F15F3BFC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98A6C825-1617-4A80-B60F-417F15F3BFC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98A6C825-1617-4A80-B60F-417F15F3BFC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E398B252-E39B-4488-BB3B-F9F49BFAD1CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E398B252-E39B-4488-BB3B-F9F49BFAD1CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E398B252-E39B-4488-BB3B-F9F49BFAD1CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E398B252-E39B-4488-BB3B-F9F49BFAD1CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,5 +108,6 @@ Global
 		{7912C783-FF53-4AE8-9143-8EF6D8ABF6A6} = {F25F3B28-C48F-44B0-AABC-BE545090759A}
 		{0349C122-52B8-4E51-8A14-6173A75AC52B} = {9DAE1C01-64C0-4418-AA2E-A8CC22BA503A}
 		{8B74CAF2-E996-47E0-B2D1-9B9A49F9B9B0} = {F25F3B28-C48F-44B0-AABC-BE545090759A}
+		{E398B252-E39B-4488-BB3B-F9F49BFAD1CF} = {5A1B0BE4-023A-42BA-8DA0-82222586E837}
 	EndGlobalSection
 EndGlobal
