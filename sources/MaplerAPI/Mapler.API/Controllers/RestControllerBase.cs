@@ -59,6 +59,14 @@ namespace Mapler.API.Controllers
             return DtoMapper.Map(Repository.Get(id));
         }
 
+        [HttpPost]
+        public virtual List<T> GetMultiple(IEnumerable<Guid> ids)
+        {
+            ids = ids.ToList();
+            var matchedItems = Repository.GetAll(x => ids.Contains(x.Id)).ToList();
+            return matchedItems.Select(x => DtoMapper.Map(x)).ToList();
+        }
+
         // POST api/values
         public virtual void Post([FromBody]T value)
         {
