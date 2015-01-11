@@ -7,12 +7,13 @@ using Mapler.DataPersistance.Models;
 using Mapler.Rest.Dto;
 using Mapler.Rest.Dto.Mapping.Interfaces;
 using Mapler.Rest.Services;
+using Microsoft.Practices.Unity;
 
 namespace Mapler.API.Controllers
 {
     public class UserController : RestControllerBase<UserDto, User>, IUserService
     {
-        public UserController(IDtoMapper<UserDto, User> dtoMapper, IPersistentRepository<User> repository, IUnitOfWork uof)
+        public UserController(IDtoMapper<UserDto, User> dtoMapper, [Dependency("filtered")] IPersistentRepository<User> repository, IUnitOfWork uof)
             : base(dtoMapper, repository, uof)
         {
         }

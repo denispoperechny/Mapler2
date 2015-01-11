@@ -6,6 +6,7 @@ using DataPersistance.Facade.MockData;
 using DataPersistence.Facade;
 using Mapler.API.Controllers;
 using Mapler.API.Security;
+using Mapler.DataAccess.RepositoryDataFiltering;
 using Mapler.DataPersistance.Models;
 using Mapler.DataPersistence.MockData;
 using Mapler.Rest.Dto;
@@ -41,14 +42,20 @@ namespace Mapler.API
             container.RegisterType<IUnitOfWork, MockDataContext>();
             container.RegisterType<IDbContext, MockDataContext>();
 
+            // Persisntent data access
             container.RegisterType<IPersistentRepository<Tag>, PersistentRepository<Tag>>();
             container.RegisterType<IPersistentRepository<Company>, PersistentRepository<Company>>();
             container.RegisterType<IPersistentRepository<User>, PersistentRepository<User>>();
             container.RegisterType<IPersistentRepository<UserPass>, PersistentRepository<UserPass>>();
 
+            // DTO Mappers
             container.RegisterType<IDtoMapper<TagDto, Tag>, TagMapper>();
             container.RegisterType<IDtoMapper<UserDto, User>, UserMapper>();
 
+            // Register security data filters
+            container.RegisterType<IPersistentRepository<User>, UserRepoWrapper>("filtered");
+            //test
+            container.RegisterType<object, object>("filtered");
         }
 
     }

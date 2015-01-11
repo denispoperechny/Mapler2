@@ -231,6 +231,10 @@
       <Project>{c23e6d21-ba84-4cf7-a0be-65b780797ff2}</Project>
       <Name>DataPersistence.Facade.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mapler.DataAccess\Mapler.DataAccess.csproj">
+      <Project>{595eab7f-073c-40f6-b767-7ce21a49e85d}</Project>
+      <Name>Mapler.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mapler.DataPersistance.Models\Mapler.DataPersistence.Models.csproj">
       <Project>{cf52216c-ac6c-4ead-a4da-044bffd3cd27}</Project>
       <Name>Mapler.DataPersistence.Models</Name>

@@ -185,7 +185,8 @@ namespace Mapler.DataPersistence.MockData
                 FirstName = "John",
                 LastName = "Smith",
                 Created = DateTime.Parse("2008-05-01"),
-                //PassHash = "nothing"
+                IsActive = true,
+                IsSuperUser = false
             };
 
             yield return new User
@@ -195,7 +196,8 @@ namespace Mapler.DataPersistence.MockData
                 FirstName = "John",
                 LastName = "Doe",
                 Created = DateTime.Parse("2008-05-01"),
-                //PassHash = "nothingaswell"
+                IsActive = true,
+                IsSuperUser = false
             };
 
             yield return new User
@@ -205,7 +207,19 @@ namespace Mapler.DataPersistence.MockData
                 FirstName = "Elvis",
                 LastName = "Presley",
                 Created = DateTime.Parse("2008-05-01"),
-                //PassHash = "itselvis"
+                IsActive = true,
+                IsSuperUser = false
+            };
+
+            yield return new User
+            {
+                Id = Guid.Parse("9795BFF5-C2DF-48EF-8C2E-C059D5A6E774"),
+                Login = "super",
+                FirstName = "super",
+                LastName = "super",
+                Created = DateTime.Parse("2008-05-01"),
+                IsActive = true,
+                IsSuperUser = true
             };
         }
 

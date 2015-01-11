@@ -39,6 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5A1B0B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapler.Security", "Mapler.Security\Mapler.Security.csproj", "{E398B252-E39B-4488-BB3B-F9F49BFAD1CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapler.DataAccess", "Mapler.DataAccess\Mapler.DataAccess.csproj", "{595EAB7F-073C-40F6-B767-7CE21A49E85D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{E398B252-E39B-4488-BB3B-F9F49BFAD1CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E398B252-E39B-4488-BB3B-F9F49BFAD1CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E398B252-E39B-4488-BB3B-F9F49BFAD1CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{595EAB7F-073C-40F6-B767-7CE21A49E85D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{595EAB7F-073C-40F6-B767-7CE21A49E85D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{595EAB7F-073C-40F6-B767-7CE21A49E85D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{595EAB7F-073C-40F6-B767-7CE21A49E85D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,5 +115,6 @@ Global
 		{0349C122-52B8-4E51-8A14-6173A75AC52B} = {9DAE1C01-64C0-4418-AA2E-A8CC22BA503A}
 		{8B74CAF2-E996-47E0-B2D1-9B9A49F9B9B0} = {F25F3B28-C48F-44B0-AABC-BE545090759A}
 		{E398B252-E39B-4488-BB3B-F9F49BFAD1CF} = {5A1B0BE4-023A-42BA-8DA0-82222586E837}
+		{595EAB7F-073C-40F6-B767-7CE21A49E85D} = {6C763792-8EFC-47B0-BBC5-6B9DABF124EA}
 	EndGlobalSection
 EndGlobal

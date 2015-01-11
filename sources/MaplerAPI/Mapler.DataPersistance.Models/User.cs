@@ -20,10 +20,14 @@ namespace Mapler.DataPersistance.Models
 
         public string LastName { get; set; }
 
-        //public string PassHash { get; set; }
-
         [Required]
         public DateTime Created { get; set; }
 
+        [Required]
+        // TODO: Decide where to handle and filter
+        public bool IsActive { get; set; }
+
+        // TODO: Provide to MaplerPrincipal
+        public bool IsSuperUser { get; set; }
     }
 }
