@@ -8,25 +8,20 @@ using DataPersistence.Facade.Data;
 
 namespace Mapler.DataPersistance.Models
 {
-    public class User : IPersistentModel
+    public class Attachment : IPersistentModel
     {
         [Key]
         public Guid Id { get; set; }
 
         [Required]
-        public string Login { get; set; }
-
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
+        public String FileName { get; set; }
 
         [Required]
         public DateTime Created { get; set; }
 
         [Required]
-        // TODO: Decide where to handle and filter
-        public bool IsActive { get; set; }
+        public MapItem MapItem { get; set; }
 
-        public bool IsSuperUser { get; set; }
+        public string Description { get; set; }
     }
 }

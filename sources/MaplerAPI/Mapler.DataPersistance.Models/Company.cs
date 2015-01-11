@@ -24,5 +24,8 @@ namespace Mapler.DataPersistance.Models
         public User Administrator { get; set; }
 
         public Location DefaultLocation { get; set; }
+
+        [Required]
+        public bool IsActive { get; set; }
     }
 }

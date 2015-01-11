@@ -73,7 +73,8 @@ namespace Mapler.DataPersistence.MockData
                 Created = DateTime.Parse("2008-05-01"),
                 DefaultLocation = defaultLocation,
                 Name = "Corporation One",
-                Users = users
+                Users = users,
+                IsActive = true
             };
 
             yield return new Company
@@ -83,7 +84,8 @@ namespace Mapler.DataPersistence.MockData
                 Created = DateTime.Parse("2008-05-01"),
                 DefaultLocation = defaultLocation,
                 Name = "Corporation Two",
-                Users = users.GetRange(1, 2)
+                Users = users.GetRange(1, 2),
+                IsActive = true
             };
         }
 

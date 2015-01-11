@@ -118,7 +118,7 @@ namespace Mapler.API.Security
                 }
 
                 var identity = new MaplerIdentity(user.Id, user.Login);
-                return new MaplerPrincipal(identity, null);
+                return new MaplerPrincipal(identity, null, user.IsSuperUser);
             });
 
             return worker;
