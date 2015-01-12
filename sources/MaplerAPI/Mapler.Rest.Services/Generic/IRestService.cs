@@ -21,5 +21,7 @@ namespace Mapler.Rest.Services.Generic
         void Put(Guid id, T value);
 
         void Delete(Guid id);
+
+        List<T> GetMultiple(IEnumerable<Guid> ids);
     }
 }

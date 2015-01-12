@@ -39,7 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IMaplerDto.cs" />
+    <Compile Include="AttachmentDto.cs" />
+    <Compile Include="CompanyDto.cs" />
+    <Compile Include="MapItemCommentDto.cs" />
+    <Compile Include="MapItemDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TagDto.cs" />
     <Compile Include="UserDto.cs" />

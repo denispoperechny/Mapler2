@@ -47,15 +47,22 @@ namespace Mapler.API
             container.RegisterType<IPersistentRepository<Company>, PersistentRepository<Company>>();
             container.RegisterType<IPersistentRepository<User>, PersistentRepository<User>>();
             container.RegisterType<IPersistentRepository<UserPass>, PersistentRepository<UserPass>>();
+            container.RegisterType<IPersistentRepository<MapItem>, PersistentRepository<MapItem>>();
+            container.RegisterType<IPersistentRepository<MapItemComment>, PersistentRepository<MapItemComment>>();
+            container.RegisterType<IPersistentRepository<Attachment>, PersistentRepository<Attachment>>();
 
             // DTO Mappers
             container.RegisterType<IDtoMapper<TagDto, Tag>, TagMapper>();
             container.RegisterType<IDtoMapper<UserDto, User>, UserMapper>();
+            container.RegisterType<IDtoMapper<CompanyDto, Company>, CompanyMapper>();
+            container.RegisterType<IDtoMapper<MapItemDto, MapItem>, MapItemMapper>();
+            container.RegisterType<IDtoMapper<MapItemCommentDto, MapItemComment>, MapItemCommentMapper>();
+            container.RegisterType<IDtoMapper<AttachmentDto, Attachment>, AttachmentMapper>();
 
             // Register security data filters
             container.RegisterType<IPersistentRepository<User>, UserRepoWrapper>("filtered");
             //test
-            container.RegisterType<object, object>("filtered");
+            //container.RegisterType<object, object>("filtered");
         }
 
     }

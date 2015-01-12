@@ -33,5 +33,8 @@ namespace Mapler.DataPersistance.Models
         public long Latitude { get; set; }
 
         public List<Tag> Tags { get; set; }
+
+        [Required]
+        public bool IsActive { get; set; }
     }
 }

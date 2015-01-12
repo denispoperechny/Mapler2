@@ -40,6 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Generic\IRestService.cs" />
+    <Compile Include="IAttachmentService.cs" />
+    <Compile Include="ICompanyService.cs" />
+    <Compile Include="IMapItemCommentService.cs" />
+    <Compile Include="IMapItemService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITagService.cs" />

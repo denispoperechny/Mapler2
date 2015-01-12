@@ -25,5 +25,7 @@ namespace Mapler.DataPersistance.Models
         [Required]
         public String Text { get; set; }
 
+        [Required]
+        public bool IsActive { get; set; }
     }
 }

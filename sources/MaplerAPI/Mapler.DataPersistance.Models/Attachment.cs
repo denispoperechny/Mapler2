@@ -23,5 +23,8 @@ namespace Mapler.DataPersistance.Models
         public MapItem MapItem { get; set; }
 
         public string Description { get; set; }
+
+        [Required]
+        public bool IsActive { get; set; }
     }
 }

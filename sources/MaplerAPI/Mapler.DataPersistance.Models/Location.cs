@@ -23,5 +23,8 @@ namespace Mapler.DataPersistance.Models
         public float Zoom { get; set; }
 
         public bool IsSystemDefault { get; set; }
+
+        [Required]
+        public bool IsActive { get; set; }
     }
 }

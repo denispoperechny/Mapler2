@@ -15,8 +15,18 @@ namespace Mapler.Rest.Dto.Mapping.Interfaces
     {
         T Map(U item);
 
+        /// <summary>
+        /// Creates a new instance of resulting object
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         U MapBack(T item);
 
+        /// <summary>
+        /// Updates the 'persistItem' accordingly to 'dtoItem'
+        /// </summary>
+        /// <param name="dtoItem"></param>
+        /// <param name="persistItem"></param>
         void UpdateBack(T dtoItem, U persistItem);
     }
 

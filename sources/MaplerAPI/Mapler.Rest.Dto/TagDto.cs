@@ -8,8 +8,14 @@ namespace Mapler.Rest.Dto
 {
     public class TagDto
     {
+        /// <summary>
+        /// Readonly
+        /// </summary>
         public Guid Id { get; set; }
 
+        /// <summary>
+        /// Readonly
+        /// </summary>
         public Guid CompanyId { get; set; }
 
         public string Name { get; set; }

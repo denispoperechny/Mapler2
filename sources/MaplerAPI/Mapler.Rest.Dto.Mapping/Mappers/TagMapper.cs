@@ -34,7 +34,8 @@ namespace Mapler.Rest.Dto.Mapping.Mappers
                 Id = item.Id,
                 CompanyId = item.Company.Id,
                 Name = item.Name,
-                Description = item.Description
+                Description = item.Description,
+                
             };
         }
 
@@ -54,7 +55,7 @@ namespace Mapler.Rest.Dto.Mapping.Mappers
 
             return new Tag
             {
-                Id = item.Id == Guid.Empty ? Guid.NewGuid() : item.Id,
+                Id = item.Id,
                 Company = tagCompany,
                 Name = item.Name,
                 Description = item.Description
@@ -66,6 +67,9 @@ namespace Mapler.Rest.Dto.Mapping.Mappers
         {
             if (dtoItem == null) throw new ArgumentNullException("dtoItem");
             if (persistItem == null) throw new ArgumentNullException("persistItem");
+
+            if (dtoItem.Id != persistItem.Id)
+                throw new MappingException("Id of source and destination objects should be the same.");
 
             //persistItem.Id = dtoItem.Id;
             persistItem.Name = dtoItem.Name;

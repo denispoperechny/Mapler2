@@ -11,5 +11,8 @@ namespace DataPersistence.Facade.Data
     {
         [Key]
         Guid Id { get; set; }
+
+        [Required]
+        bool IsActive { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataPersistance.Facade;
 using Mapler.DataPersistance.Models;
+using Mapler.Rest.Dto.Mapping.Exceptions;
 using Mapler.Rest.Dto.Mapping.Interfaces;
 
 namespace Mapler.Rest.Dto.Mapping.Mappers
@@ -29,7 +30,7 @@ namespace Mapler.Rest.Dto.Mapping.Mappers
 
             var result = new User
             {
-                Id = item.Id == Guid.Empty ? Guid.NewGuid() : item.Id,
+                Id = item.Id,
                 Created = DateTime.Now,
                 FirstName = item.FirstName,
                 LastName = item.LastName,
@@ -45,11 +46,14 @@ namespace Mapler.Rest.Dto.Mapping.Mappers
             if (dtoItem == null) throw new ArgumentNullException("dtoItem");
             if (persistItem == null) throw new ArgumentNullException("persistItem");
 
+            if (dtoItem.Id != persistItem.Id)
+                throw new MappingException("Id of source and destination objects should be the same.");
+
             //persistItem.Id = dtoItem.Id;
             persistItem.FirstName = dtoItem.FirstName;
             persistItem.LastName = dtoItem.LastName;
-            //persistItem.Created
-            //persistItem.Login
+            persistItem.Created = dtoItem.Created;
+            persistItem.Login = persistItem.Login;
         }
     }
 }
