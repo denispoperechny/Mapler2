@@ -41,8 +41,8 @@ namespace DataPersistance.Facade.MockData
             lock (_updateLock)
             {
                 var item = GetDataCollection<T>().FirstOrDefault(x => x.Id == id);
-                if (item == null)
-                    throw new InvalidOperationException(string.Format("Not found entity of type: {0}. Id: {1}", typeof(T), id));
+                //if (item == null)
+                //    throw new InvalidOperationException(string.Format("Not found entity of type: {0}. Id: {1}", typeof(T), id));
                 
                 return item;
             }

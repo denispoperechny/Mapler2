@@ -8,7 +8,11 @@ using DataPersistence.Facade.Data;
 
 namespace Mapler.DataAccess.RepositoryDataFiltering
 {
-    public interface IRepoWrapper<T> : IPersistentRepository<T> where T : IPersistentModel
+    /// <summary>
+    /// Encapsulates business logics
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IRepoProxy<T> : IPersistentRepository<T> where T : IPersistentModel
     {
     }
 }

@@ -10,6 +10,11 @@ namespace DataPersistance.Facade
 {
     public interface IPersistentRepository<T> where T : IPersistentModel
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>'null' if item with given has not been found</returns>
         T Get(Guid id);
 
         IEnumerable<T> GetAll();

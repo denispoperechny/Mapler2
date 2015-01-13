@@ -7,6 +7,7 @@ using DataPersistence.Facade;
 using Mapler.API.Controllers;
 using Mapler.API.Security;
 using Mapler.DataAccess.RepositoryDataFiltering;
+using Mapler.DataAccess.RepositoryDataFiltering.Proxies;
 using Mapler.DataPersistance.Models;
 using Mapler.DataPersistence.MockData;
 using Mapler.Rest.Dto;
@@ -60,7 +61,7 @@ namespace Mapler.API
             container.RegisterType<IDtoMapper<AttachmentDto, Attachment>, AttachmentMapper>();
 
             // Register security data filters
-            container.RegisterType<IPersistentRepository<User>, UserRepoWrapper>("filtered");
+            container.RegisterType<IPersistentRepository<User>, UserRepoProxy>("filtered");
             //test
             //container.RegisterType<object, object>("filtered");
         }

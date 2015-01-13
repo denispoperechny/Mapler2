@@ -10,7 +10,7 @@ using Mapler.Rest.Dto.Mapping.Interfaces;
 
 namespace Mapler.Rest.Dto.Mapping.Mappers
 {
-    public class UserMapper : IDtoMapper<UserDto, User>
+    public class UserMapper : MapperBase, IDtoMapper<UserDto, User>
     {
         public UserDto Map(User item)
         {
@@ -39,7 +39,6 @@ namespace Mapler.Rest.Dto.Mapping.Mappers
 
             return result;
         }
-
 
         public void UpdateBack(UserDto dtoItem, User persistItem)
         {

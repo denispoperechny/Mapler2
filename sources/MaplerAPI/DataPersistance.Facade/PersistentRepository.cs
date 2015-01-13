@@ -17,6 +17,11 @@ namespace DataPersistance.Facade
             _context = context;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>null if item has not been found</returns>
         public T Get(Guid id)
         {
             return _context.Get<T>(id);

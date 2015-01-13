@@ -13,7 +13,7 @@ namespace Mapler.Rest.Dto.Mapping.Mappers
     /// <summary>
     /// Maps TagDto to persistent Tag object.
     /// </summary>
-    public class TagMapper : IDtoMapper<TagDto, Tag>
+    public class TagMapper : MapperBase, IDtoMapper<TagDto, Tag>
     {
         private readonly IPersistentRepository<Company> _companyRepo; 
 
@@ -43,15 +43,7 @@ namespace Mapler.Rest.Dto.Mapping.Mappers
         {
             if (item == null) throw new ArgumentNullException("item");
 
-            Company tagCompany = null;
-            try
-            {
-                tagCompany = _companyRepo.Get(item.CompanyId);
-            }
-            catch (Exception e)
-            {
-                throw new InvalidPersistentDataException("Could not get Company. Company Id: " + item.CompanyId, e);
-            }
+            Company tagCompany = GetPersistentItem(_companyRepo, item.CompanyId);
 
             return new Tag
             {
@@ -71,21 +63,12 @@ namespace Mapler.Rest.Dto.Mapping.Mappers
             if (dtoItem.Id != persistItem.Id)
                 throw new MappingException("Id of source and destination objects should be the same.");
 
+            if (persistItem.Company.Id != dtoItem.CompanyId)
+                persistItem.Company = GetPersistentItem(_companyRepo, dtoItem.CompanyId);
+
             //persistItem.Id = dtoItem.Id;
             persistItem.Name = dtoItem.Name;
             persistItem.Description = dtoItem.Description;
-
-            if (persistItem.Company == null || persistItem.Company.Id != dtoItem.CompanyId)
-            {
-                try
-                {
-                    persistItem.Company = _companyRepo.Get(dtoItem.CompanyId);
-                }
-                catch (Exception e)
-                {
-                    throw new InvalidPersistentDataException("Could not get Company. Company Id: " + dtoItem.CompanyId, e);
-                }
-            }
         }
     }
 }

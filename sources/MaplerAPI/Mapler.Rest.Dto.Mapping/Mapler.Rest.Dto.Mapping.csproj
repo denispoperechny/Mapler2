@@ -46,6 +46,7 @@
     <Compile Include="Mappers\CompanyMapper.cs" />
     <Compile Include="Mappers\MapItemCommentMapper.cs" />
     <Compile Include="Mappers\MapItemMapper.cs" />
+    <Compile Include="Mappers\MapperBase.cs" />
     <Compile Include="Mappers\TagMapper.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

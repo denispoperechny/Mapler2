@@ -101,7 +101,7 @@ namespace Mapler.API.Security
             var worker = Task.Factory.StartNew<IPrincipal>(() =>
             {
                 var user =
-                    _userRepo.GetAll(x => x.Login.Equals(userName, StringComparison.InvariantCultureIgnoreCase))
+                    _userRepo.GetAll(x => x.Login.Equals(userName, StringComparison.InvariantCultureIgnoreCase) && x.IsActive)
                         .FirstOrDefault();
 
                 if (user == null)

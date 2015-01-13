@@ -56,7 +56,14 @@ namespace Mapler.API.Controllers
         // GET api/values/5
         public virtual T Get(Guid id)
         {
-            return DtoMapper.Map(Repository.Get(id));
+            var result = DtoMapper.Map(Repository.Get(id));
+            // TODO: try to use IHttpActionResult and NotFound() result
+            //if (result == null)
+            //    return NotFound();
+            // IHttpActionResult 
+            // Ok(result)
+            // NotFound()
+            return result;
         }
 
         [HttpPost]
@@ -78,6 +85,9 @@ namespace Mapler.API.Controllers
         public virtual void Put(Guid id, [FromBody]T value)
         {
             var persistItem = Repository.Get(id);
+            if (persistItem == null)
+                throw new InvalidOperationException("Cannot find item Id: " + id);
+
             DtoMapper.UpdateBack(value, persistItem);
             Repository.Update(persistItem);
             UnitOfWork.Save();
