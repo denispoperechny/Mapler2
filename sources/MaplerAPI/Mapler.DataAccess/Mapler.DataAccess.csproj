@@ -41,7 +41,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryDataFiltering\Exceptions\DataAccessRestrictedException.cs" />
-    <Compile Include="RepositoryDataFiltering\IRepoProxy.cs" />
+    <Compile Include="RepositoryDataFiltering\IRepoBusinessProxy.cs" />
+    <Compile Include="RepositoryDataFiltering\Proxies\CompanyRepoProxy.cs" />
     <Compile Include="RepositoryDataFiltering\Proxies\UserRepoProxy.cs" />
     <Compile Include="RepositoryDataFiltering\RepoProxyBase.cs" />
   </ItemGroup>

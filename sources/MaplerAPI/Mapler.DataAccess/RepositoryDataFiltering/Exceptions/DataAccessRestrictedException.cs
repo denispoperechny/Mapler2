@@ -13,6 +13,11 @@ namespace Mapler.DataAccess.RepositoryDataFiltering.Exceptions
         {
         }
 
+        public DataAccessRestrictedException(Type requestedType, Guid requestedId, string currentUserLogin, string messsage)
+            : base(string.Format("Restricted access to resource: '{0}', Id: '{1}' for user login '{2}'. {3}", requestedType, requestedId, currentUserLogin, messsage))
+        {
+        }
+
         public DataAccessRestrictedException(string message)
             : base(message)
         {

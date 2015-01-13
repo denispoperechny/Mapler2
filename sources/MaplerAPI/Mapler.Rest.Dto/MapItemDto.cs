@@ -29,5 +29,9 @@ namespace Mapler.Rest.Dto
         public long Latitude { get; set; }
 
         public List<Guid> TagIds { get; set; }
+
+        public List<Guid> CommentIds { get; set; }
+
+        public List<Guid> AttachmentIds { get; set; }
     }
 }
