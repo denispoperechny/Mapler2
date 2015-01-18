@@ -9,7 +9,7 @@ using Mapler.DataPersistance.Models;
 
 namespace Mapler.DataAccess.RepositoryDataFiltering.Proxies
 {
-    public class CompanyRepoProxy : RepoProxyBase<Company>
+    public class CompanyRepoProxy : RepoProxyBase<Company>, IRepoBusinessProxy<Company>
     {
         private readonly IPersistentRepository<User> _userRepo;
         private readonly IPersistentRepository<Location> _locationRepo;
@@ -24,20 +24,20 @@ namespace Mapler.DataAccess.RepositoryDataFiltering.Proxies
             _locationRepo = locationRepo;
         }
 
-        protected override List<Guid> GetReadableEntityIds(Guid regularUserId)
+        protected override List<Guid> GetReadableEntityIds(Guid regularUserId, List<Guid> userCompanyIds)
         {
             // Allow all users to see all companies in the system but hide some fields
             return Repository.GetAll(x => x.IsActive).Select(x => x.Id).ToList();
         }
 
-        protected override List<Guid> GetEditableEntityIds(Guid regularUserId)
+        protected override List<Guid> GetEditableEntityIds(Guid regularUserId, List<Guid> userCompanyIds)
         {
             // Allow edit only those companies where user is Admin
             return Repository.GetAll(x => x.IsActive && x.Administrator.Id == regularUserId)
                 .Select(x => x.Id).ToList();
         }
 
-        protected override List<Guid> GetDeletableEntityIds(Guid regularUserId)
+        protected override List<Guid> GetDeletableEntityIds(Guid regularUserId, List<Guid> userCompanyIds)
         {
             // Don't allow to delete companies for users
             return new List<Guid>();

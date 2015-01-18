@@ -31,6 +31,7 @@ namespace Mapler.API.Security
     {
         private readonly IPersistentRepository<User> _userRepo;
         private readonly IPersistentRepository<UserPass> _passRepo;
+        private readonly IPersistentRepository<Company> _copmanyRepo;
 
         public MaplerBasicAuthenticationAttribute()
         {
@@ -38,11 +39,15 @@ namespace Mapler.API.Security
                 GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IPersistentRepository<User>));
             _passRepo = (IPersistentRepository<UserPass>)
                 GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IPersistentRepository<UserPass>));
+            _copmanyRepo = (IPersistentRepository<Company>)
+                GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IPersistentRepository<Company>));
 
             if (_userRepo == null)
                 throw new InvalidOperationException("Cannot resolve IPersistentRepository<User>");
             if (_passRepo == null)
                 throw new InvalidOperationException("Cannot resolve IPersistentRepository<UserPass>");
+            if (_copmanyRepo == null)
+                throw new InvalidOperationException("Cannot resolve IPersistentRepository<Company>");
         }
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
@@ -116,9 +121,10 @@ namespace Mapler.API.Security
                     Trace.WriteLine("Error. Incorrect password for user: " + userName);
                     return null;
                 }
-
+                var companies = _copmanyRepo.GetAll(x => x.Administrator.Id == user.Id || x.Users.Any(a => a.Id == user.Id))
+                    .Select(s => s.Id).ToList();
                 var identity = new MaplerIdentity(user.Id, user.Login);
-                return new MaplerPrincipal(identity, null, user.IsSuperUser);
+                return new MaplerPrincipal(identity, companies, null, user.IsSuperUser);
             });
 
             return worker;

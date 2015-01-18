@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataPersistance.Facade;
 using DataPersistence.Facade.Data;
+using Mapler.DataAccess.RepositoryDataFiltering;
 using Mapler.Rest.Dto.Mapping.Exceptions;
 using Mapler.Rest.Dto.Mapping.Interfaces;
 
@@ -12,7 +13,7 @@ namespace Mapler.Rest.Dto.Mapping.Mappers
 {
     public abstract class MapperBase
     {
-        protected T GetPersistentItem<T>(IPersistentRepository<T> repository, Guid id) where T : IPersistentModel
+        protected T GetPersistentItem<T>(IRepoBusinessProxy<T> repository, Guid id) where T : IPersistentModel
         {
             var result = repository.Get(id);
             if (result == null)
@@ -20,7 +21,7 @@ namespace Mapler.Rest.Dto.Mapping.Mappers
             return result;
         }
 
-        protected List<T> GetPersistentItems<T>(IPersistentRepository<T> repository, IEnumerable<Guid> ids) where T : IPersistentModel
+        protected List<T> GetPersistentItems<T>(IRepoBusinessProxy<T> repository, IEnumerable<Guid> ids) where T : IPersistentModel
         {
             var staticIds = ids.Distinct().ToList();
             var records = repository.GetAll(x => staticIds.Contains(x.Id)).ToList();

@@ -21,6 +21,7 @@ namespace Mapler.DataPersistence.MockData
             result.AddDataCollection(MapItems);
             result.AddDataCollection(Locations);
             result.AddDataCollection(UserPasswords);
+            result.AddDataCollection(Attachments);
 
             return result;
         }
@@ -35,6 +36,12 @@ namespace Mapler.DataPersistence.MockData
         public static List<User> Users
         {
             get { return _users ?? (_users = GenerateUsers().ToList()); }
+        }
+
+        //private static List<Attachment> _attachments;
+        public static List<Attachment> Attachments
+        {
+            get { return new List<Attachment>();}
         }
 
         private static List<Tag> _tags;
@@ -215,7 +222,7 @@ namespace Mapler.DataPersistence.MockData
 
             yield return new User
             {
-                Id = Guid.Parse("9795BFF5-C2DF-48EF-8C2E-C059D5A6E774"),
+                Id = Guid.Parse("9795BFF5-C2DF-48EF-8C2E-C059D5A6E785"),
                 Login = "super",
                 FirstName = "super",
                 LastName = "super",

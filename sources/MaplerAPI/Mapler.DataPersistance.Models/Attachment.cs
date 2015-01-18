@@ -17,6 +17,9 @@ namespace Mapler.DataPersistance.Models
         public String FileName { get; set; }
 
         [Required]
+        public User Author { get; set; }
+
+        [Required]
         public DateTime Created { get; set; }
 
         [Required]

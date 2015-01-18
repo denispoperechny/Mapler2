@@ -51,6 +51,15 @@ namespace Mapler.API
             container.RegisterType<IPersistentRepository<MapItem>, PersistentRepository<MapItem>>();
             container.RegisterType<IPersistentRepository<MapItemComment>, PersistentRepository<MapItemComment>>();
             container.RegisterType<IPersistentRepository<Attachment>, PersistentRepository<Attachment>>();
+            container.RegisterType<IPersistentRepository<Location>, PersistentRepository<Location>>();
+
+            // Register data business layer
+            container.RegisterType<IRepoBusinessProxy<User>, UserRepoProxy>();
+            container.RegisterType<IRepoBusinessProxy<Company>, CompanyRepoProxy>();
+            container.RegisterType<IRepoBusinessProxy<MapItem>, MapItemRepoProxy>();
+            container.RegisterType<IRepoBusinessProxy<MapItemComment>, MapItemCommentRepoProxy>();
+            container.RegisterType<IRepoBusinessProxy<Tag>, TagRepoProxy>();
+            container.RegisterType<IRepoBusinessProxy<Attachment>, AttachmentRepoProxy>();
 
             // DTO Mappers
             container.RegisterType<IDtoMapper<TagDto, Tag>, TagMapper>();
@@ -60,10 +69,12 @@ namespace Mapler.API
             container.RegisterType<IDtoMapper<MapItemCommentDto, MapItemComment>, MapItemCommentMapper>();
             container.RegisterType<IDtoMapper<AttachmentDto, Attachment>, AttachmentMapper>();
 
-            // Register security data filters
-            container.RegisterType<IPersistentRepository<User>, UserRepoProxy>("filtered");
             //test
             //container.RegisterType<object, object>("filtered");
+
+            // controllers
+            //container.RegisterType<TagController, TagController>();
+
         }
 
     }

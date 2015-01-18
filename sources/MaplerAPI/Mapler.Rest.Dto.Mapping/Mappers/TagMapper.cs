@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataPersistance.Facade;
+using Mapler.DataAccess.RepositoryDataFiltering;
 using Mapler.DataPersistance.Models;
 using Mapler.Rest.Dto.Mapping.Exceptions;
 using Mapler.Rest.Dto.Mapping.Interfaces;
@@ -15,9 +16,9 @@ namespace Mapler.Rest.Dto.Mapping.Mappers
     /// </summary>
     public class TagMapper : MapperBase, IDtoMapper<TagDto, Tag>
     {
-        private readonly IPersistentRepository<Company> _companyRepo; 
+        private readonly IRepoBusinessProxy<Company> _companyRepo;
 
-        public TagMapper(IPersistentRepository<Company> companyRepo)
+        public TagMapper(IRepoBusinessProxy<Company> companyRepo)
         {
             _companyRepo = companyRepo;
         }

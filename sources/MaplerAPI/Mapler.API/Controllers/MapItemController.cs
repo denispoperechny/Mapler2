@@ -11,9 +11,9 @@ using Mapler.Rest.Services;
 
 namespace Mapler.API.Controllers
 {
-    public class TagController : RestControllerBase<TagDto, Tag>, ITagService
+    public class MapItemController : RestControllerBase<MapItemDto, MapItem>, IMapItemService
     {
-        public TagController(IDtoMapper<TagDto, Tag> dtoMapper, IRepoBusinessProxy<Tag> repository, IUnitOfWork uof)
+        public MapItemController(IDtoMapper<MapItemDto, MapItem> dtoMapper, IRepoBusinessProxy<MapItem> repository, IUnitOfWork uof)
             : base(dtoMapper, repository, uof)
         {
         }

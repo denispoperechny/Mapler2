@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DataPersistance.Facade;
+using Mapler.DataAccess.RepositoryDataFiltering;
 using Mapler.DataPersistance.Models;
 using Mapler.Rest.Dto;
 using Mapler.Rest.Dto.Mapping.Interfaces;
@@ -13,7 +14,7 @@ namespace Mapler.API.Controllers
 {
     public class UserController : RestControllerBase<UserDto, User>, IUserService
     {
-        public UserController(IDtoMapper<UserDto, User> dtoMapper, [Dependency("filtered")] IPersistentRepository<User> repository, IUnitOfWork uof)
+        public UserController(IDtoMapper<UserDto, User> dtoMapper, IRepoBusinessProxy<User> repository, IUnitOfWork uof)
             : base(dtoMapper, repository, uof)
         {
         }
