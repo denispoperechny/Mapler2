@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataPersistence.Facade.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Mapler.Rest.Dto.Mapping.Interfaces
     /// </summary>
     /// <typeparam name="T">DTO type</typeparam>
     /// <typeparam name="U">Persistent type</typeparam>
-    public interface IDtoMapper<T, U>
+    public interface IDtoMapper<T, U> //where U : class, IPersistentModel
     {
         T Map(U item);
 

@@ -8,7 +8,7 @@ using DataPersistence.Facade;
 
 namespace DataPersistance.Facade
 {
-    public interface IPersistentRepository<T> where T : IPersistentModel
+    public interface IPersistentRepository<T> where T : class, IPersistentModel
     {
         /// <summary>
         /// 

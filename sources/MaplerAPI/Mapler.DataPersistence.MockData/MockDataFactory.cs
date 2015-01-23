@@ -131,7 +131,8 @@ namespace Mapler.DataPersistence.MockData
                 Name = "Point #1",
                 Tags = Tags,
                 Company = companies[0],
-                Author = companies[0].Users[1]
+                Author = companies[0].Users[1],
+                IsActive = true
             };
 
             yield return new MapItem
@@ -144,7 +145,8 @@ namespace Mapler.DataPersistence.MockData
                 Name = "Point #2",
                 Tags = Tags,
                 Company = companies[0],
-                Author = companies[0].Users[1]
+                Author = companies[0].Users[1],
+                IsActive = true
             };
 
             yield return new MapItem
@@ -157,7 +159,8 @@ namespace Mapler.DataPersistence.MockData
                 Name = "Point #3",
                 Tags = Tags,
                 Company = companies[1],
-                Author = companies[1].Users[1]
+                Author = companies[1].Users[1],
+                IsActive = true
             };
 
             yield return new MapItem
@@ -170,7 +173,8 @@ namespace Mapler.DataPersistence.MockData
                 Name = "Point #4",
                 Tags = Tags,
                 Company = companies[1],
-                Author = companies[1].Users[1]
+                Author = companies[1].Users[1],
+                IsActive = true
             };
         }
 
@@ -181,7 +185,8 @@ namespace Mapler.DataPersistence.MockData
                 Id = Guid.Parse("C60576F2-574E-4682-BF4A-157263810AD9"),
                 Company = Companies.First(),
                 Description = "Favorites items",
-                Name = "Favorites"
+                Name = "Favorites",
+                IsActive = true
             };
         }
 

@@ -8,7 +8,7 @@ using DataPersistence.Facade;
 
 namespace DataPersistance.Facade
 {
-    public class PersistentRepository<T> : IPersistentRepository<T> where T : IPersistentModel
+    public class PersistentRepository<T> : IPersistentRepository<T> where T : class, IPersistentModel
     {
         private readonly IDbContext _context;
 

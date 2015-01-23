@@ -9,6 +9,6 @@ namespace DataPersistance.Facade.MockData
 {
     public interface IMockDataProvider
     {
-        void AddDataCollection<T>(List<T> data) where T : IPersistentModel;
+        void AddDataCollection<T>(List<T> data) where T : class, IPersistentModel;
     }
 }

@@ -100,7 +100,7 @@ namespace DataPersistence.Facade.Tests
             Assert.AreNotEqual(initialName, tagsRepo.Get(tag.Id).Name, "Tag name has not been updated");
         }
 
-        public IPersistentRepository<T> GetMockRepo<T>() where T : IPersistentModel
+        public IPersistentRepository<T> GetMockRepo<T>() where T : class, IPersistentModel
         {
             return new PersistentRepository<T>(GetMockDataContext());
         }

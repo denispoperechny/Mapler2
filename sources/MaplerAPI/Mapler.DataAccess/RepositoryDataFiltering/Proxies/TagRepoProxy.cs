@@ -11,13 +11,9 @@ namespace Mapler.DataAccess.RepositoryDataFiltering.Proxies
 {
     public class TagRepoProxy : RepoProxyBase<Tag>, IRepoBusinessProxy<Tag>
     {
-        private readonly IPersistentRepository<Company> _companyRepo;
-
-        public TagRepoProxy(IPersistentRepository<Tag> repo, IPersistentRepository<Company> companyRepo)
+        public TagRepoProxy(IPersistentRepository<Tag> repo)
             : base(repo)
         {
-            if (companyRepo == null) throw new ArgumentNullException("companyRepo");
-            _companyRepo = companyRepo;
         }
 
         protected override List<Guid> GetReadableEntityIds(Guid regularUserId, List<Guid> userCompanyIds)
@@ -27,7 +23,7 @@ namespace Mapler.DataAccess.RepositoryDataFiltering.Proxies
 
         protected override List<Guid> GetEditableEntityIds(Guid regularUserId, List<Guid> userCompanyIds)
         {
-            var companiesWhereAdmin = _companyRepo.GetAll(x => x.Administrator.Id.Equals(regularUserId))
+            var companiesWhereAdmin = CompanyRepository.GetAll(x => x.Administrator.Id.Equals(regularUserId) && x.IsActive)
                 .Select(s => s.Id).ToList();
             return Repository.GetAll(x => companiesWhereAdmin.Contains(x.Company.Id)).Select(s => s.Id).ToList();
         }
@@ -41,6 +37,7 @@ namespace Mapler.DataAccess.RepositoryDataFiltering.Proxies
         {
             updatedStateItem.Company = alreadyExistingItem.Company;
             updatedStateItem.IsActive = alreadyExistingItem.IsActive;
+            updatedStateItem.MapItems = alreadyExistingItem.MapItems;
         }
 
         protected override void CheckFieldsOnCreate(Tag newItem)

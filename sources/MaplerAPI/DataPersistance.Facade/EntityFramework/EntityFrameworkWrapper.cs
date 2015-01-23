@@ -10,32 +10,32 @@ namespace DataPersistance.Facade.EntityFramework
 {
     public class EntityFrameworkWrapper : IDbContext, IUnitOfWork
     {
-        public T Get<T>(Guid id) where T : IPersistentModel
+        public T Get<T>(Guid id) where T : class, IPersistentModel
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<T> GetAll<T>() where T : IPersistentModel
+        public IEnumerable<T> GetAll<T>() where T : class, IPersistentModel
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<T> GetAll<T>(Func<T, bool> filterPredicate) where T : IPersistentModel
+        public IEnumerable<T> GetAll<T>(Func<T, bool> filterPredicate) where T : class, IPersistentModel
         {
             throw new NotImplementedException();
         }
 
-        public void Add<T>(T newItem) where T : IPersistentModel
+        public void Add<T>(T newItem) where T : class, IPersistentModel
         {
             throw new NotImplementedException();
         }
 
-        public void Update<T>(T updatedState) where T : IPersistentModel
+        public void Update<T>(T updatedState) where T : class, IPersistentModel
         {
             throw new NotImplementedException();
         }
 
-        public void Delete<T>(Guid id) where T : IPersistentModel
+        public void Delete<T>(Guid id) where T : class, IPersistentModel
         {
             throw new NotImplementedException();
         }

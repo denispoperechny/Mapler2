@@ -10,13 +10,9 @@ namespace Mapler.DataAccess.RepositoryDataFiltering.Proxies
 {
     public class MapItemRepoProxy : RepoProxyBase<MapItem>, IRepoBusinessProxy<MapItem>
     {
-        private readonly IPersistentRepository<Company> _companyRepo;
-
-        public MapItemRepoProxy(IPersistentRepository<MapItem> userRepo, IPersistentRepository<Company> companyRepo)
+        public MapItemRepoProxy(IPersistentRepository<MapItem> userRepo)
             : base(userRepo)
         {
-            if (companyRepo == null) throw new ArgumentNullException("companyRepo");
-            _companyRepo = companyRepo;
         }
 
         protected override List<Guid> GetReadableEntityIds(Guid regularUserId, List<Guid> userCompanyIds)
@@ -27,7 +23,7 @@ namespace Mapler.DataAccess.RepositoryDataFiltering.Proxies
 
         protected override List<Guid> GetEditableEntityIds(Guid regularUserId, List<Guid> userCompanyIds)
         {
-            var companies = _companyRepo.GetAll(x => userCompanyIds.Contains(x.Id)).ToList();
+            var companies = CompanyRepository.GetAll(x => userCompanyIds.Contains(x.Id)).ToList();
             List<Guid> result = new List<Guid>();
             foreach (var company in companies)
             {
@@ -42,7 +38,7 @@ namespace Mapler.DataAccess.RepositoryDataFiltering.Proxies
 
         protected override List<Guid> GetDeletableEntityIds(Guid regularUserId, List<Guid> userCompanyIds)
         {
-            var administratedCompanies = _companyRepo.GetAll(x => x.Administrator.Id == regularUserId)
+            var administratedCompanies = CompanyRepository.GetAll(x => x.Administrator.Id == regularUserId)
                 .Select(s => s.Id).ToList();
             return Repository.GetAll(x => administratedCompanies.Contains(x.Company.Id))
                 .Select(s => s.Id).ToList();

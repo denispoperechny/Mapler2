@@ -12,7 +12,7 @@ namespace Mapler.DataAccess.RepositoryDataFiltering
     /// Encapsulates business logics
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IRepoBusinessProxy<T> : IPersistentRepository<T> where T : IPersistentModel
+    public interface IRepoBusinessProxy<T> : IPersistentRepository<T> where T : class, IPersistentModel
     {
     }
 }

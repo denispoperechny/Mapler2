@@ -14,7 +14,7 @@ namespace Mapler.API.Controllers
 {
     [MaplerBasicAuthentication]
     [Authorize]
-    public abstract class RestControllerBase<T, U> : ApiController, IRestService<T> where U : IPersistentModel
+    public abstract class RestControllerBase<T, U> : ApiController, IRestService<T> where U : class, IPersistentModel
     {
         private readonly IDtoMapper<T, U> _dtoMapper;
         private readonly IPersistentRepository<U> _repository;

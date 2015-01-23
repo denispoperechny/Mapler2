@@ -15,6 +15,8 @@ using Mapler.Rest.Dto.Mapping;
 using Mapler.Rest.Dto.Mapping.Interfaces;
 using Mapler.Rest.Dto.Mapping.Mappers;
 using Unity.WebApi;
+using Mapler.DataPersistence.EntityFramework.EFContext;
+using System;
 
 namespace Mapler.API
 {
@@ -28,7 +30,7 @@ namespace Mapler.API
 
             // e.g. container.RegisterType<ITestService, TestService>();
             RegisterTypes(container);
-
+            
             //container.RegisterType<MaplerBasicAuthenticationAttribute, MaplerBasicAuthenticationAttribute>();
             //var test = container.Resolve<MaplerBasicAuthenticationAttribute>();
 
@@ -37,11 +39,17 @@ namespace Mapler.API
 
         private static void RegisterTypes(UnityContainer container)
         {
-            // Mock data setup
-            container.RegisterType<MockDataContext>(new ContainerControlledLifetimeManager(),
-                new InjectionFactory(c => MockDataFactory.GetSomeMockData()));
-            container.RegisterType<IUnitOfWork, MockDataContext>();
-            container.RegisterType<IDbContext, MockDataContext>();
+            ////Mock data setup
+            //container.RegisterType<MockDataContext>(new ContainerControlledLifetimeManager(),
+            //    new InjectionFactory(c => MockDataFactory.GetSomeMockData()));
+            //container.RegisterType<IUnitOfWork, MockDataContext>();
+            //container.RegisterType<IDbContext, MockDataContext>();
+
+            // EF
+            container.RegisterType<MaplerContext>(new ContainerControlledLifetimeManager(),
+                new InjectionFactory(c => new MaplerContext()));
+            container.RegisterType<IUnitOfWork, MaplerContext>();
+            container.RegisterType<IDbContext, MaplerContext>();
 
             // Persisntent data access
             container.RegisterType<IPersistentRepository<Tag>, PersistentRepository<Tag>>();

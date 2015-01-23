@@ -21,13 +21,13 @@ namespace DataPersistance.Facade.MockData
         {
         }
 
-        public void AddDataCollection<T>(List<T> data) where T : IPersistentModel
+        public void AddDataCollection<T>(List<T> data) where T : class, IPersistentModel
         {
             if (data == null) throw new ArgumentNullException("data");
             _dataStorage.Add(typeof(T), data );
         }
 
-        private IList<U> GetDataCollection<U>() where U : IPersistentModel
+        private IList<U> GetDataCollection<U>() where U : class, IPersistentModel
         {
             var dataType = typeof (U);
             if (!_dataStorage.ContainsKey(dataType))
@@ -36,7 +36,7 @@ namespace DataPersistance.Facade.MockData
             return (IList<U>)_dataStorage[dataType];
         }
 
-        public T Get<T>(Guid id) where T : IPersistentModel
+        public T Get<T>(Guid id) where T : class, IPersistentModel
         {
             lock (_updateLock)
             {
@@ -48,7 +48,7 @@ namespace DataPersistance.Facade.MockData
             }
         }
 
-        public IEnumerable<T> GetAll<T>() where T : IPersistentModel
+        public IEnumerable<T> GetAll<T>() where T : class, IPersistentModel
         {
             lock (_updateLock)
             {
@@ -56,7 +56,7 @@ namespace DataPersistance.Facade.MockData
             }
         }
 
-        public IEnumerable<T> GetAll<T>(Func<T, bool> filterPredicate) where T : IPersistentModel
+        public IEnumerable<T> GetAll<T>(Func<T, bool> filterPredicate) where T : class, IPersistentModel
         {
             if (filterPredicate == null) throw new ArgumentNullException("filterPredicate");
 
@@ -66,7 +66,7 @@ namespace DataPersistance.Facade.MockData
             }
         }
 
-        public void Add<T>(T newItem) where T : IPersistentModel
+        public void Add<T>(T newItem) where T : class, IPersistentModel
         {
             if (newItem == null) throw new ArgumentNullException("newItem");
             if (newItem.Id == Guid.Empty) throw new ArgumentException("newItem.Id should not be Guid.Empty");
@@ -83,7 +83,7 @@ namespace DataPersistance.Facade.MockData
             }
         }
 
-        public void Update<T>(T updatedState) where T : IPersistentModel
+        public void Update<T>(T updatedState) where T : class, IPersistentModel
         {
             var data = GetDataCollection<T>();
 
@@ -98,7 +98,7 @@ namespace DataPersistance.Facade.MockData
             }
         }
 
-        public void Delete<T>(Guid id) where T : IPersistentModel
+        public void Delete<T>(Guid id) where T : class, IPersistentModel
         {
             var data = GetDataCollection<T>();
 

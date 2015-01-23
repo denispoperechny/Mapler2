@@ -86,6 +86,7 @@ namespace Mapler.API.Security
             string userName = userNameAndPasword.Item1;
             string password = userNameAndPasword.Item2;
 
+            
             IPrincipal principal = await AuthenticateAsync(userName, password, cancellationToken);
             if (principal == null)
             {

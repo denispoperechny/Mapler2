@@ -39,6 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.Unity">
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
@@ -242,6 +250,10 @@
     <ProjectReference Include="..\Mapler.DataPersistance.Models\Mapler.DataPersistence.Models.csproj">
       <Project>{cf52216c-ac6c-4ead-a4da-044bffd3cd27}</Project>
       <Name>Mapler.DataPersistence.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapler.DataPersistence.EntityFramework\Mapler.DataPersistence.EntityFramework.csproj">
+      <Project>{1c6d60f7-e76a-4667-ae44-130435d2719d}</Project>
+      <Name>Mapler.DataPersistence.EntityFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapler.DataPersistence.MockData\Mapler.DataPersistence.MockData.csproj">
       <Project>{0cc5ceb7-1fad-48ce-bb2e-742452b2166d}</Project>
