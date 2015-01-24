@@ -41,10 +41,10 @@ namespace Mapler.DataAccess.RepositoryDataFiltering
         }
 
         [Dependency]
-        protected IPersistentRepository<User> UserRepository { get; set; }
+        public IPersistentRepository<User> UserRepository { get; set; }
 
         [Dependency]
-        protected IPersistentRepository<Company> CompanyRepository { get; set; }
+        public IPersistentRepository<Company> CompanyRepository { get; set; }
 
         protected MaplerPrincipal Principal
         {

@@ -10,8 +10,8 @@ namespace Mapler.DataAccess.RepositoryDataFiltering.Proxies
 {
     public class MapItemRepoProxy : RepoProxyBase<MapItem>, IRepoBusinessProxy<MapItem>
     {
-        public MapItemRepoProxy(IPersistentRepository<MapItem> userRepo)
-            : base(userRepo)
+        public MapItemRepoProxy(IPersistentRepository<MapItem> mapItemRepo)
+            : base(mapItemRepo)
         {
         }
 

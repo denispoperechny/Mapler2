@@ -1,8 +1,11 @@
 ﻿using DataPersistance.Facade;
 using DataPersistence.Facade;
+using Mapler.DataAccess.RepositoryDataFiltering;
+using Mapler.DataAccess.RepositoryDataFiltering.Proxies;
 using Mapler.DataPersistance.Models;
 using Mapler.DataPersistence.EntityFramework.EFContext;
 using Mapler.DataPersistence.MockData;
+using Mapler.Security;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -18,39 +21,26 @@ namespace Mapler.TestingConsole
         static void Main(string[] args)
         {
             var dbContext = new MaplerContext("MaplerDB");
-            //dbContext.Database.Initialize(false);
-            //var entry1 = (dbContext as IDbContext).GetAll<Company>().First();
-            //var entry2 = (dbContext as IDbContext).GetAll<Company>().First();
-            //var entry3 = (dbContext as IDbContext).GetAll<Company>().First();
-
+            
+            IPersistentRepository<MapItem> _mapItemRepo = new PersistentRepository<MapItem>(dbContext);
             IPersistentRepository<User> _userRepo = new PersistentRepository<User>(dbContext);
             IPersistentRepository<Company> _copmanyRepo = new PersistentRepository<Company>(dbContext);
-            IPersistentRepository<UserPass> _passRepo = new PersistentRepository<UserPass>(dbContext);
 
-            var heat = _userRepo.GetAll().First();
+            Authenticate("j_doe", _userRepo, _copmanyRepo, true);
 
-            for (int i = 0; i < 100; i++)
-            {
-                var ii = i;
-                Task.Factory.StartNew(() => { 
-                    var user =
-                            _userRepo.GetAll(x => x.Login.Equals("j_doe", StringComparison.InvariantCultureIgnoreCase) && x.IsActive)
-                                .FirstOrDefault();
+            IRepoBusinessProxy<MapItem> _mapItemProxy = new MapItemRepoProxy(_mapItemRepo);
+            (_mapItemProxy as RepoProxyBase<MapItem>).UserRepository = _userRepo;
+            (_mapItemProxy as RepoProxyBase<MapItem>).CompanyRepository = _copmanyRepo;
 
-                    var passHash = _passRepo.GetAll(x => x.UserId == user.Id || x.IsActive).First().PassHash;
+            //_mapItemProxy.Delete(Guid.Parse("68BEA510-D9FA-4256-9E56-4B55580D23ED"));
+            var item = _mapItemProxy.GetAll().First(x => x.Name == "TEST_NEW");
 
-                    var companies = _copmanyRepo.GetAll(x => x.Administrator.Id == user.Id || x.Users.Any(a => a.Id == user.Id))
-                            .Select(s => s.Id).ToList();
+            //_mapItemProxy.Update(item);
+            //_mapItemProxy.Delete(item.Id);
+            (dbContext as IDbContext).Delete<MapItem>(item.Id);
 
-                    
-                    Console.WriteLine("Done: " + ii);
-                });
-                //var entry2 = dbContext.Companies.First();
-                //var entry3 = dbContext.Companies.Include("Users") .First();
-                //var entry4 = (dbContext.Companies as DbSet<Company>).Include(x => x.Users) .First();
-            }
-
-            Thread.Sleep(10000);
+            dbContext.SaveChanges();
+            dbContext.Dispose();
         }
 
         static void FillDBMock()
@@ -80,6 +70,17 @@ namespace Mapler.TestingConsole
             dbContext.SaveChanges();
             dbContext.UserPasswords.AddRange(MockDataFactory.UserPasswords);
             dbContext.SaveChanges();
+        }
+
+        private static void Authenticate(string userName, IPersistentRepository<User> userRepo, IPersistentRepository<Company> companyRepo, bool isSuper = false)
+        {
+            var user = userRepo.GetAll(x => x.Login == userName).First();
+            var companies = companyRepo.GetAll(x => x.Administrator.Id == user.Id || x.Users.Any(a => a.Id == user.Id)).Select(s => s.Id).ToList();
+
+            var identity = new MaplerIdentity(user.Id, user.Login);
+            var principal = new MaplerPrincipal(identity, companies, null, isSuper);
+
+            Thread.CurrentPrincipal = principal;
         }
     }
 }

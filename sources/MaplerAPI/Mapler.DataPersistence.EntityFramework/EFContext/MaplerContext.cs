@@ -26,6 +26,7 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
+            this.Configuration.AutoDetectChangesEnabled = false;
         }
 
         #region EntityFramework
@@ -81,7 +82,7 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             lock (_operationLock)
             {
-                IQueryable<T> dataSource = GetDbSet<T>();
+                IQueryable<T> dataSource = this.Set<T>();
                 dataSource = CustomInclude(dataSource);
                 return dataSource.First(x => x.Id == id);
             }
@@ -91,7 +92,7 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             lock (_operationLock)
             {
-                IQueryable<T> dataSource = GetDbSet<T>();
+                IQueryable<T> dataSource = this.Set<T>();
                 dataSource = CustomInclude(dataSource);
                 return dataSource.ToList();
             }
@@ -101,7 +102,7 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             lock (_operationLock)
             {
-                IQueryable<T> dataSource = GetDbSet<T>();
+                IQueryable<T> dataSource = this.Set<T>();
                 dataSource = CustomInclude(dataSource);
                 return dataSource.Where(filterPredicate).ToList();
             }
@@ -111,7 +112,7 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             lock (_operationLock)
             {
-                GetDbSet<T>().Add(newItem);
+                this.Set<T>().Add(newItem);
             }
         }
 
@@ -119,7 +120,9 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             lock (_operationLock)
             {
-                GetDbSet<T>().Add(updatedState);
+                this.ChangeTracker.Entries()
+                    .First(x => x.Entity == updatedState)
+                    .State = EntityState.Modified;
             }
         }
 
@@ -127,20 +130,9 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             lock (_operationLock)
             {
-                var entity = GetDbSet<T>().First(x => x.Id == id);
-                GetDbSet<T>().Remove(entity);
+                var entity = this.Set<T>().First(x => x.Id == id);
+                this.Set<T>().Remove(entity);
             }
-        }
-
-        protected virtual DbSet<T> GetDbSet<T>() where T : class, IPersistentModel
-        {
-            var targetType = typeof(T);
-            var propertyInfo = typeof(MaplerContext).GetProperties().First(x => 
-                x.PropertyType.GenericTypeArguments[0] == targetType 
-                && x.PropertyType.Name == "DbSet`1");
-
-            var result = propertyInfo.GetValue(this);
-            return (DbSet<T>)result;
         }
 
         protected virtual IQueryable<T> CustomInclude<T>(IQueryable<T> dataSource) where T : class, IPersistentModel
