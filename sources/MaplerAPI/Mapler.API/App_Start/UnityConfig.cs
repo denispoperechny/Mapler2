@@ -1,6 +1,7 @@
 using Microsoft.Practices.Unity;
 using System.Web.Http;
 using System.Web.Http.Dependencies;
+using System.Linq;
 using DataPersistance.Facade;
 using DataPersistance.Facade.MockData;
 using DataPersistence.Facade;
@@ -48,6 +49,9 @@ namespace Mapler.API
             // EF
             container.RegisterType<MaplerContext>(new ContainerControlledLifetimeManager(),
                 new InjectionFactory(c => new MaplerContext()));
+            // prepare to prevent concurrency issues
+            // http://stackoverflow.com/questions/6099781/how-can-i-prevent-ef-the-context-cannot-be-used-while-the-model-is-being-create
+            (container.Resolve<MaplerContext>().Users as IQueryable<User>).Any();
             container.RegisterType<IUnitOfWork, MaplerContext>();
             container.RegisterType<IDbContext, MaplerContext>();
 

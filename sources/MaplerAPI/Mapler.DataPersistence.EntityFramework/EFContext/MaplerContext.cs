@@ -93,7 +93,7 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
             {
                 IQueryable<T> dataSource = GetDbSet<T>();
                 dataSource = CustomInclude(dataSource);
-                return dataSource;
+                return dataSource.ToList();
             }
         }
 
@@ -103,7 +103,7 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
             {
                 IQueryable<T> dataSource = GetDbSet<T>();
                 dataSource = CustomInclude(dataSource);
-                return dataSource.Where(filterPredicate);
+                return dataSource.Where(filterPredicate).ToList();
             }
         }
 
