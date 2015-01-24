@@ -68,6 +68,17 @@ namespace Mapler.DataPersistence.MockData
             get { return _userPasswords ?? (_userPasswords = GenerateUserPasswords().ToList()); }
         }
 
+        private static List<MapItemComment> _mapItemComments;
+        public static List<MapItemComment> MapItemComments
+        {
+            get { return _mapItemComments ?? (_mapItemComments = GenerateMapItemComments().ToList()); }
+        }
+
+        private static IEnumerable<MapItemComment> GenerateMapItemComments()
+        {
+            return Enumerable.Empty<MapItemComment>();
+        }
+
         private static IEnumerable<Company> GenerateCompanies()
         {
             var users = Users;
@@ -192,48 +203,56 @@ namespace Mapler.DataPersistence.MockData
 
         private static IEnumerable<User> GenerateUsers()
         {
+            Guid id1 = Guid.Parse("B02E3C74-1568-44C2-B154-3F2B79355E11");
             yield return new User
             {
-                Id = Guid.Parse("B02E3C74-1568-44C2-B154-3F2B79355E11"),
+                Id = id1,
                 Login = "j_smith",
                 FirstName = "John",
                 LastName = "Smith",
                 Created = DateTime.Parse("2008-05-01"),
                 IsActive = true,
-                IsSuperUser = false
+                IsSuperUser = false,
+                //Companies = Companies.Where(x => x.Users.Any(a => a.Id == id1)).ToList()
             };
 
+            Guid id2 = Guid.Parse("20E825B3-5642-4D9E-A06C-0B854AD19E17");
             yield return new User
             {
-                Id = Guid.Parse("20E825B3-5642-4D9E-A06C-0B854AD19E17"),
+                Id = id2,
                 Login = "j_doe",
                 FirstName = "John",
                 LastName = "Doe",
                 Created = DateTime.Parse("2008-05-01"),
                 IsActive = true,
-                IsSuperUser = false
+                IsSuperUser = false,
+                //Companies = Companies.Where(x => x.Users.Any(a => a.Id == id2)).ToList()
             };
 
+            Guid id3 = Guid.Parse("9795BFF5-C2DF-48EF-8C2E-C059D5A6E774");
             yield return new User
             {
-                Id = Guid.Parse("9795BFF5-C2DF-48EF-8C2E-C059D5A6E774"),
+                Id = id3,
                 Login = "e_presley",
                 FirstName = "Elvis",
                 LastName = "Presley",
                 Created = DateTime.Parse("2008-05-01"),
                 IsActive = true,
-                IsSuperUser = false
+                IsSuperUser = false,
+                //Companies = Companies.Where(x => x.Users.Any(a => a.Id == id3)).ToList()
             };
 
+            Guid id4 = Guid.Parse("9795BFF5-C2DF-48EF-8C2E-C059D5A6E785");
             yield return new User
             {
-                Id = Guid.Parse("9795BFF5-C2DF-48EF-8C2E-C059D5A6E785"),
+                Id = id4,
                 Login = "super",
                 FirstName = "super",
                 LastName = "super",
                 Created = DateTime.Parse("2008-05-01"),
                 IsActive = true,
-                IsSuperUser = true
+                IsSuperUser = true,
+                //Companies = Companies.Where(x => x.Users.Any(a => a.Id == id4)).ToList()
             };
         }
 

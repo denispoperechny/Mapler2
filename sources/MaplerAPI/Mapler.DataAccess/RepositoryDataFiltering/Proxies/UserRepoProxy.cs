@@ -50,6 +50,7 @@ namespace Mapler.DataAccess.RepositoryDataFiltering.Proxies
             updatedStateItem.IsActive = alreadyExistingItem.IsActive;
             updatedStateItem.Created = alreadyExistingItem.Created;
             updatedStateItem.IsSuperUser = alreadyExistingItem.IsSuperUser;
+            updatedStateItem.Companies = alreadyExistingItem.Companies;
         }
 
         protected override void CheckFieldsOnCreate(User newItem)
@@ -63,11 +64,12 @@ namespace Mapler.DataAccess.RepositoryDataFiltering.Proxies
 
             newItem.Created = DateTime.Now;
             newItem.IsSuperUser = false;
+            newItem.Companies = new List<Company>();
         }
 
         protected override void FilterFieldsOnGet(User item)
         {
-            // Any nested collections or items to shrink
+            item.Companies = item.Companies.Where(x => Principal.Companies.Contains(x.Id)).ToList();
             return;
         }
     }

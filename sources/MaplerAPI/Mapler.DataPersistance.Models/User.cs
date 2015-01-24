@@ -29,6 +29,8 @@ namespace Mapler.DataPersistance.Models
 
         public bool IsSuperUser { get; set; }
 
+        public List<Company> Companies { get; set; }
+
         public string GetFullName()
         {
             return string.Format("{0} {1}", FirstName, LastName);

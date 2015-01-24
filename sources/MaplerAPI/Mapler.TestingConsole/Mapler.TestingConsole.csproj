@@ -72,6 +72,10 @@
       <Project>{1c6d60f7-e76a-4667-ae44-130435d2719d}</Project>
       <Name>Mapler.DataPersistence.EntityFramework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mapler.DataPersistence.MockData\Mapler.DataPersistence.MockData.csproj">
+      <Project>{0cc5ceb7-1fad-48ce-bb2e-742452b2166d}</Project>
+      <Name>Mapler.DataPersistence.MockData</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

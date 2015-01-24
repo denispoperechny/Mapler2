@@ -42,6 +42,26 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            modelBuilder.Entity<Company>()
+                   .HasMany<User>(s => s.Users)
+                   .WithMany(c => c.Companies)
+                   .Map(cs =>
+                   {
+                       cs.MapLeftKey("CompanyId");
+                       cs.MapRightKey("UserId");
+                       cs.ToTable("UserCompany");
+                   });
+
+            modelBuilder.Entity<Tag>()
+                   .HasMany<MapItem>(s => s.MapItems)
+                   .WithMany(c => c.Tags)
+                   .Map(cs =>
+                   {
+                       cs.MapLeftKey("TagId");
+                       cs.MapRightKey("MapItemId");
+                       cs.ToTable("MapItemTag");
+                   });
         }
         #endregion
 
@@ -61,7 +81,9 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             lock (_operationLock)
             {
-                return GetDbSet<T>().First(x => x.Id == id);
+                IQueryable<T> dataSource = GetDbSet<T>();
+                dataSource = CustomInclude(dataSource);
+                return dataSource.First(x => x.Id == id);
             }
         }
 
@@ -69,7 +91,9 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             lock (_operationLock)
             {
-                return GetDbSet<T>();
+                IQueryable<T> dataSource = GetDbSet<T>();
+                dataSource = CustomInclude(dataSource);
+                return dataSource;
             }
         }
 
@@ -77,7 +101,9 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             lock (_operationLock)
             {
-                return GetDbSet<T>().Where(filterPredicate);
+                IQueryable<T> dataSource = GetDbSet<T>();
+                dataSource = CustomInclude(dataSource);
+                return dataSource.Where(filterPredicate);
             }
         }
 
@@ -115,6 +141,17 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
 
             var result = propertyInfo.GetValue(this);
             return (DbSet<T>)result;
+        }
+
+        protected virtual IQueryable<T> CustomInclude<T>(IQueryable<T> dataSource) where T : class, IPersistentModel
+        {
+            if (typeof(T) == typeof(MapItem))
+                return (dataSource as DbSet<MapItem>).Include(i => i.Tags) as IQueryable<T>;
+
+            if (typeof(T) == typeof(Company))
+                return (dataSource as DbSet<Company>).Include(i => i.Users) as IQueryable<T>;
+
+            return dataSource;
         }
 
         #endregion
