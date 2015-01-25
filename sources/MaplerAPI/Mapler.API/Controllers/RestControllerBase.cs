@@ -66,13 +66,13 @@ namespace Mapler.API.Controllers
             return result;
         }
 
-        [HttpPost]
-        public virtual List<T> GetMultiple(IEnumerable<Guid> ids)
-        {
-            ids = ids.ToList();
-            var matchedItems = Repository.GetAll(x => ids.Contains(x.Id)).ToList();
-            return matchedItems.Select(x => DtoMapper.Map(x)).ToList();
-        }
+        //[HttpPost]
+        //public virtual List<T> GetMultiple(IEnumerable<Guid> ids)
+        //{
+        //    ids = ids.ToList();
+        //    var matchedItems = Repository.GetAll(x => ids.Contains(x.Id)).ToList();
+        //    return matchedItems.Select(x => DtoMapper.Map(x)).ToList();
+        //}
 
         // POST api/values
         public virtual void Post([FromBody]T value)
