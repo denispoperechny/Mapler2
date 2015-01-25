@@ -6,6 +6,7 @@ using Mapler.DataPersistance.Models;
 using Mapler.DataPersistence.EntityFramework.EFContext;
 using Mapler.DataPersistence.MockData;
 using Mapler.Security;
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Data.Entity.Infrastructure;
 
 namespace Mapler.TestingConsole
 {
@@ -21,27 +23,32 @@ namespace Mapler.TestingConsole
         static void Main(string[] args)
         {
             var dbContext = new MaplerContext("MaplerDB");
-            
-            IPersistentRepository<MapItem> _mapItemRepo = new PersistentRepository<MapItem>(dbContext);
-            IPersistentRepository<User> _userRepo = new PersistentRepository<User>(dbContext);
-            IPersistentRepository<Company> _copmanyRepo = new PersistentRepository<Company>(dbContext);
 
-            Authenticate("j_doe", _userRepo, _copmanyRepo, true);
+            //dbContext.ChangeTracker.Entries().First().Collection().
 
-            IRepoBusinessProxy<MapItem> _mapItemProxy = new MapItemRepoProxy(_mapItemRepo);
-            (_mapItemProxy as RepoProxyBase<MapItem>).UserRepository = _userRepo;
-            (_mapItemProxy as RepoProxyBase<MapItem>).CompanyRepository = _copmanyRepo;
+            var miId = Guid.Parse("5283DECB-CE3F-40A2-BBD4-B11F21DC7F13");
+            var tID = Guid.Parse("B02E3C74-1568-44C2-B154-3F2B79355E11");
+            var company = dbContext.Companies.Where(x => x.Id == miId).First();
+            var newAdmin = dbContext.Users.Where(x => x.Id == tID).First();
 
-            //_mapItemProxy.Delete(Guid.Parse("68BEA510-D9FA-4256-9E56-4B55580D23ED"));
-            var item = _mapItemProxy.GetAll().First(x => x.Name == "TEST_NEW");
+            var objectContext = ((IObjectContextAdapter)dbContext).ObjectContext;
+            //var relations = objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Unchanged)
+            //                .Where(e => e.IsRelationship);
 
-            //_mapItemProxy.Update(item);
-            //_mapItemProxy.Delete(item.Id);
-            (dbContext as IDbContext).Delete<MapItem>(item.Id);
+
+            company.Administrator = newAdmin;
+            company.Name = "Company 111";
+            (dbContext as IDbContext).Update<Company>(company);
+
+
+            //objectContext.ObjectStateManager.ChangeRelationshipState(company, newAdmin, "Administrator", EntityState.Added);
 
             dbContext.SaveChanges();
             dbContext.Dispose();
         }
+
+        //  mapItem.Tags.Add(newTag);
+        //    objectContext.ObjectStateManager.ChangeRelationshipState(mapItem, newTag, "Tags", EntityState.Added);
 
         static void FillDBMock()
         {

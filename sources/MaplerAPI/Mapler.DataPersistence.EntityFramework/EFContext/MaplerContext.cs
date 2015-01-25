@@ -5,6 +5,7 @@ using Mapler.DataPersistance.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,7 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
+            // Disabled due to IDbContext.Update<T>(T entity) idea
             this.Configuration.AutoDetectChangesEnabled = false;
         }
 
@@ -71,7 +73,6 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             lock (_operationLock)
             {
-                // this.Save() ?
                 this.SaveChanges();
             }
         }
@@ -120,9 +121,8 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             lock (_operationLock)
             {
-                this.ChangeTracker.Entries()
-                    .First(x => x.Entity == updatedState)
-                    .State = EntityState.Modified;
+                this.Entry(updatedState).State = EntityState.Modified;
+                UpdateReferncesState(updatedState);
             }
         }
 
@@ -144,6 +144,25 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
                 return (dataSource as DbSet<Company>).Include(i => i.Users) as IQueryable<T>;
 
             return dataSource;
+        }
+
+        #endregion
+
+        #region Custom change tracking
+
+        /// <summary>
+        /// Update the nested references state while the AutoChangeTracking is disabled.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        protected virtual void UpdateReferncesState<T>(T entity) where T : class, IPersistentModel
+        {
+            // Many-to-Many changes tracking
+            // http://stackoverflow.com/questions/7490509/entity-framework-4-1-many-to-many-relationships-change-tracking
+            // var objectContext = ((IObjectContextAdapter)this).ObjectContext;
+            // objectContext.ObjectStateManager.ChangeRelationshipState(company, newAdmin, "Administrator", EntityState.Added);
+
+            this.ChangeTracker.DetectChanges();
         }
 
         #endregion
