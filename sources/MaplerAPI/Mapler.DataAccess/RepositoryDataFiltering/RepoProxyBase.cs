@@ -72,7 +72,7 @@ namespace Mapler.DataAccess.RepositoryDataFiltering
                 return result;
             } 
             else
-                throw new DataAccessRestrictedException(typeof(User), id, Principal.Identity.Name);
+                throw new DataAccessRestrictedException(typeof(T), id, Principal.Identity.Name);
         }
 
         public IEnumerable<T> GetAll()

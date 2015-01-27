@@ -6,6 +6,8 @@ using System.Web.Http;
 using DataPersistance.Facade;
 using Mapler.API.Security;
 using Mapler.DataPersistance.Models;
+using System.Web.Http.Routing;
+using System.Net.Http;
 
 namespace Mapler.API
 {
@@ -18,15 +20,53 @@ namespace Mapler.API
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+            //config.Routes.MapHttpRoute(
+            //    name: "CustomPostAction",
+            //    routeTemplate: "api/{controller}/extras/{action}",
+            //    defaults: null,
+            //    constraints: new { action = @"[a-zA-Z]+" }
+            //);
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                defaults: new { id = RouteParameter.Optional },
+                constraints: new { id = new GuidConstraint(true) }
             );
-
+            
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
             config.DependencyResolver = UnityConfig.CreateContainer();
+        }
+    }
+
+    public class GuidConstraint : IHttpRouteConstraint
+    {
+        private readonly bool _allowEmpty;
+        public GuidConstraint(bool allowEmpty)
+        {
+            _allowEmpty = allowEmpty;
+        }
+
+        public bool Match(HttpRequestMessage request, IHttpRoute route, string parameterName, IDictionary<string, object> values,
+                          HttpRouteDirection routeDirection)
+        {
+            if (_allowEmpty && values.ContainsKey(parameterName) && string.Empty == values[parameterName].ToString())
+                return true;
+
+            if (values.ContainsKey(parameterName))
+            {
+                string stringValue = values[parameterName] as string;
+
+                if (!string.IsNullOrEmpty(stringValue))
+                {
+                    Guid guidValue;
+
+                    return Guid.TryParse(stringValue, out guidValue) && (guidValue != Guid.Empty);
+                }
+            }
+
+            return false;
         }
     }
 }
