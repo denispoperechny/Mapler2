@@ -9,9 +9,11 @@ using DataPersistence.Facade.Data;
 using Mapler.API.Security;
 using Mapler.Rest.Dto.Mapping.Interfaces;
 using Mapler.Rest.Services.Generic;
+using Elmah.Contrib.WebApi;
 
 namespace Mapler.API.Controllers
 {
+    [ElmahHandleErrorApiAttribute]
     [MaplerBasicAuthentication]
     [Authorize]
     public abstract class RestControllerBase<T, U> : ApiController, IRestService<T> where U : class, IPersistentModel
@@ -56,7 +58,8 @@ namespace Mapler.API.Controllers
         // GET api/values/5
         public virtual T Get(Guid id)
         {
-            var result = DtoMapper.Map(Repository.Get(id));
+            var entity = Repository.Get(id);
+            var result = DtoMapper.Map(entity);
             // TODO: try to use IHttpActionResult and NotFound() result
             //if (result == null)
             //    return NotFound();

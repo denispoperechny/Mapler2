@@ -17,7 +17,7 @@ namespace Mapler.Security
 
         public string AuthenticationType
         {
-            get { throw new NotImplementedException(); }
+            get { return "basic"; }
         }
 
         public bool IsAuthenticated

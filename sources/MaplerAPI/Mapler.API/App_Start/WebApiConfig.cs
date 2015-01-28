@@ -8,6 +8,8 @@ using Mapler.API.Security;
 using Mapler.DataPersistance.Models;
 using System.Web.Http.Routing;
 using System.Net.Http;
+using System.Web.Http.ExceptionHandling;
+using Elmah.Contrib.WebApi;
 
 namespace Mapler.API
 {
@@ -16,6 +18,7 @@ namespace Mapler.API
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            SetupLogging(config);
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -37,6 +40,12 @@ namespace Mapler.API
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
             config.DependencyResolver = UnityConfig.CreateContainer();
+        }
+
+        private static void SetupLogging(HttpConfiguration config)
+        {
+            // The 'ElmahHandleErrorApiAttribute' attribute on controllers is used as well
+            config.Services.Add(typeof(IExceptionLogger), new ElmahExceptionLogger());
         }
     }
 
