@@ -85,7 +85,7 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
             {
                 IQueryable<T> dataSource = this.Set<T>();
                 dataSource = CustomInclude(dataSource);
-                return dataSource.First(x => x.Id == id);
+                return dataSource.AsNoTracking().First(x => x.Id == id);
             }
         }
 
@@ -95,7 +95,7 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
             {
                 IQueryable<T> dataSource = this.Set<T>();
                 dataSource = CustomInclude(dataSource);
-                return dataSource.ToList();
+                return dataSource.AsNoTracking().ToList();
             }
         }
 
@@ -105,7 +105,7 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
             {
                 IQueryable<T> dataSource = this.Set<T>();
                 dataSource = CustomInclude(dataSource);
-                return dataSource.Where(filterPredicate).ToList();
+                return dataSource.AsNoTracking().Where(filterPredicate).ToList();
             }
         }
 
@@ -121,8 +121,11 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         {
             lock (_operationLock)
             {
-                this.Entry(updatedState).State = EntityState.Modified;
-                UpdateReferncesState(updatedState);
+                //this.Set<T>().(updatedState);
+                var existingItem = CustomInclude<T>(this.Set<T>()).First(x => x.Id == updatedState.Id);
+                this.Entry(existingItem).CurrentValues.SetValues(updatedState);
+                this.Entry(existingItem).State = EntityState.Modified;
+                UpdateReferncesState(existingItem);
             }
         }
 
@@ -138,10 +141,29 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
         protected virtual IQueryable<T> CustomInclude<T>(IQueryable<T> dataSource) where T : class, IPersistentModel
         {
             if (typeof(T) == typeof(MapItem))
-                return (dataSource as DbSet<MapItem>).Include(i => i.Tags) as IQueryable<T>;
+                return (dataSource as DbSet<MapItem>)
+                    .Include(i => i.Tags)
+                    .Include(i => i.Company)
+                    .Include(i => i.Author)
+                    as IQueryable<T>;
 
             if (typeof(T) == typeof(Company))
-                return (dataSource as DbSet<Company>).Include(i => i.Users) as IQueryable<T>;
+                return (dataSource as DbSet<Company>)
+                    .Include(i => i.Users)
+                    .Include(i => i.Administrator) 
+                    as IQueryable<T>;
+
+            if (typeof(T) == typeof(MapItemComment))
+                return (dataSource as DbSet<MapItemComment>)
+                    .Include(i => i.Author)
+                    .Include(i => i.MapItem)
+                    as IQueryable<T>;
+
+            if (typeof(T) == typeof(Tag))
+                return (dataSource as DbSet<Tag>)
+                    .Include(i => i.Company)
+                    .Include(i => i.MapItems)
+                    as IQueryable<T>;
 
             return dataSource;
         }
