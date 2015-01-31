@@ -165,6 +165,17 @@ namespace Mapler.DataPersistence.EntityFramework.EFContext
                     .Include(i => i.MapItems)
                     as IQueryable<T>;
 
+            if (typeof(T) == typeof(User))
+                return (dataSource as DbSet<User>)
+                    .Include(i => i.Companies)
+                    as IQueryable<T>;
+
+            if (typeof(T) == typeof(Attachment))
+                return (dataSource as DbSet<Attachment>)
+                    .Include(i => i.Author)
+                    .Include(i => i.MapItem)
+                    as IQueryable<T>;
+
             return dataSource;
         }
 
