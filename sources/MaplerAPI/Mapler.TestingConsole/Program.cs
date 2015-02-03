@@ -22,33 +22,76 @@ namespace Mapler.TestingConsole
     {
         static void Main(string[] args)
         {
-            var dbContext = new MaplerContext("MaplerDB");
-
-            //dbContext.ChangeTracker.Entries().First().Collection().
-
-            var miId = Guid.Parse("5283DECB-CE3F-40A2-BBD4-B11F21DC7F13");
-            var tID = Guid.Parse("B02E3C74-1568-44C2-B154-3F2B79355E11");
-            var company = dbContext.Companies.Where(x => x.Id == miId).First();
-            var newAdmin = dbContext.Users.Where(x => x.Id == tID).First();
-
-            var objectContext = ((IObjectContextAdapter)dbContext).ObjectContext;
-            //var relations = objectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Unchanged)
-            //                .Where(e => e.IsRelationship);
-
-
-            company.Administrator = newAdmin;
-            company.Name = "Company 111";
-            (dbContext as IDbContext).Update<Company>(company);
-
-
-            //objectContext.ObjectStateManager.ChangeRelationshipState(company, newAdmin, "Administrator", EntityState.Added);
-
-            dbContext.SaveChanges();
-            dbContext.Dispose();
+            Test2();
         }
 
-        //  mapItem.Tags.Add(newTag);
-        //    objectContext.ObjectStateManager.ChangeRelationshipState(mapItem, newTag, "Tags", EntityState.Added);
+        private static void Test2()
+        {
+            using (var dbContext = new MaplerContext("MaplerDB"))
+            {
+
+                IDbContext context = dbContext;
+
+                var company1 = dbContext.Set(typeof(Company)).Find(Guid.Parse("5283DECB-CE3F-40A2-BBD4-B11F21DC7F13"));
+
+                var tag = context.GetAll<Tag>().First();
+                var newTag = new Tag()
+                {
+                    Id = tag.Id,
+                    Company = tag.Company,
+                    Description = tag.Description,
+                    IsActive = tag.IsActive,
+                    MapItems = tag.MapItems,
+                    Name = tag.Name
+                };
+
+                var companyId = Guid.Parse("092F35ED-E31F-417D-8DAD-8B8ACC1E04FA");
+                newTag.Name = "Test 11122";
+                newTag.MapItems = new List<MapItem>(new[] { newTag.MapItems.First()});
+                newTag.Company = dbContext.Companies.AsNoTracking().First(x => x.Id == companyId);
+
+
+                context.Update<Tag>(newTag);
+
+                (dbContext as IUnitOfWork).Save();
+            }
+
+        }
+
+        private static void Test1()
+        {
+            using (var dbContext = new MaplerContext("MaplerDB"))
+            {
+
+                var company1 = dbContext.Set(typeof(Company)).Find(Guid.Parse("5283DECB-CE3F-40A2-BBD4-B11F21DC7F13"));
+
+                var tag = dbContext.Tags.Include(i => i.Company).Include(i => i.MapItems).AsNoTracking().First();
+                var newTag = new Tag()
+                {
+                    Id = tag.Id,
+                    Company = tag.Company,
+                    Description = tag.Description,
+                    IsActive = tag.IsActive,
+                    MapItems = tag.MapItems,
+                    Name = tag.Name
+                };
+
+                var companyId = Guid.Parse("5283DECB-CE3F-40A2-BBD4-B11F21DC7F13");
+                newTag.Name = "Test 111";
+                newTag.Company = dbContext.Companies.AsNoTracking().First(x => x.Id == companyId);
+
+
+                dbContext.Companies.Attach(newTag.Company);
+                //dbContext.Entry(newTag.Company).State = EntityState.Unchanged;
+
+                dbContext.Tags.Attach(newTag);
+                dbContext.Entry(newTag).State = EntityState.Modified;
+
+
+                (dbContext as IUnitOfWork).Save();
+            }
+
+        }
 
         static void FillDBMock()
         {
