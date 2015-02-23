@@ -11,12 +11,10 @@ using Mapler.API.Security;
 using Mapler.Rest.Dto.Mapping.Interfaces;
 using Mapler.Rest.Services.Generic;
 using Elmah.Contrib.WebApi;
-using Mapler.API.CORS;
 
 namespace Mapler.API.Controllers
 {
-    //[EnableCors(origins: "*", headers: "*", methods: "*")]
-    //[CorsPolicyProvider]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [ElmahHandleErrorApiAttribute]
     [MaplerBasicAuthentication]
     [Authorize]
