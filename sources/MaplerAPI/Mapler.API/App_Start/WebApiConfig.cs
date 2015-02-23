@@ -10,6 +10,7 @@ using System.Web.Http.Routing;
 using System.Net.Http;
 using System.Web.Http.ExceptionHandling;
 using Elmah.Contrib.WebApi;
+using Mapler.API.CORS;
 
 namespace Mapler.API
 {
@@ -22,6 +23,8 @@ namespace Mapler.API
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            config.EnableCors(new CorsPolicyProviderAttribute());
 
             //config.Routes.MapHttpRoute(
             //    name: "CustomPostAction",

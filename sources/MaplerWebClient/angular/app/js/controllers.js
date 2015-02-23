@@ -27,9 +27,24 @@ maplerControllers.controller('CompanyCtrl', ['$scope', 'UserStatus',
 
 maplerControllers.controller('MapOverviewCtrl', ['$scope', 'UserStatus', 'RestClient',
     function($scope, UserStatus, RestClient) {
-        var mapItems = RestClient.getAll('mapItem');
-        $scope.testData = mapItems;
-        alert(mapItems.length);
+
+        var mapItems = RestClient.getAll('mapItem')
+            .success(function(data) {
+            alert(data.length);
+            })
+            .error(function (data, status) {
+                alert('error');
+            })
+            .finally(function () {
+                // Execute logic independent of success/error
+                alert('done');
+            })
+            .catch(function (error) {
+                // Catch and handle exceptions from success/error/finally functions
+                alert('error');
+            });
+
+        //$scope.testData = data1;
         $scope.isLoggedIn = UserStatus;
     }]);
 

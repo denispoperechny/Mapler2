@@ -22,7 +22,8 @@ namespace Mapler.TestingConsole
     {
         static void Main(string[] args)
         {
-            Test2();
+            //Test2();
+
         }
 
         private static void Test2()

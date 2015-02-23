@@ -16,13 +16,18 @@ var maplerServices = angular.module('maplerServices', [
 maplerServices.factory('ConfigService', [
     function(){
         var configs = {
-            dataServicesConnectionString: 'http://localhost:19384/api/'
+            dataServicesConnectionString: 'http://localhost:19384/api/',
+            dataServiceAuthentication: 'Basic al9kb2U6cGFzcw=='//'j_doe:pass'
         }
         return configs;
     }]);
 
 maplerServices.factory('RestClient', ['$http', 'ConfigService',
     function($http, ConfigService){
+
+        $http.defaults.headers.common['Authorization'] = ConfigService.dataServiceAuthentication;
+        delete $http.defaults.headers.common['X-Requested-With'];
+
         var client = {
             _connectionString: ConfigService.dataServicesConnectionString,
             getAll: function(dataType) {

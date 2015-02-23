@@ -4,15 +4,19 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using DataPersistance.Facade;
 using DataPersistence.Facade.Data;
 using Mapler.API.Security;
 using Mapler.Rest.Dto.Mapping.Interfaces;
 using Mapler.Rest.Services.Generic;
 using Elmah.Contrib.WebApi;
+using Mapler.API.CORS;
 
 namespace Mapler.API.Controllers
 {
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
+    //[CorsPolicyProvider]
     [ElmahHandleErrorApiAttribute]
     [MaplerBasicAuthentication]
     [Authorize]
